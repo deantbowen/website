@@ -35,6 +35,9 @@
             text-decoration: none;
             font-weight: bold;
         }
+        a:hover {
+            text-decoration: underline; /* Underline links on hover */
+        }
         .button-container {
             text-align: center;
             margin-top: 30px;
@@ -92,77 +95,5 @@
     <p>
         I'm a Cyber Security Analyst based in Cape Town, South Africa.
            
-        If you're into IT, cyber security, AI or blockchain and want to connect, feel free to reach out here, link: <a href="https://www.linkedin.com/in/dtblin" target="_blank" class="button">LinkedIn Profile</a>.
+        If you're into IT, cyber security, AI or blockchain and want to connect, feel free to reach out here, link: <a href="https://www.linkedin.com/in/dtblin" target="_blank">LinkedIn Profile</a>.
     </p>
-    <h2>What I'm working on</h2>
-    <p>
-        This website for one, I will be adding content, as I go through my career.
-        When I'm not busy locking down networks, you can find me exploring the cyber world on TryHackMe platforms. 
-        Check that out here, link: <a href="https://tryhackme.com/p/3chO" target="_blank" class="button">TryHackMe Profile</a>.
-    </p>
-        
-    <h2>Resources</h2>
-    <p>
-        Below you will find a comprehensive list of Pentesting tools and a few demos I've documented of real hacks performed on my own machines/networks (I gave myself permission).
-    </p>
-
-    <h2>Disclaimer</h2>
-    <p>
-        THIS INFORMATION IS FOR LEARNING PURPOSES ONLY! ALWAYS GET PERMISSION BEFORE PERFORMING ANY PENTESTING ON ANY MACHINE OR NETWORK.
-    </p>
-
-    <!-- Button to go to another repository -->
-    <div class="button-container">
-        <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Pentesting%20Tools%202024.pdf'">A list of Pentesting tools in 2024</button>
-        <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/System%20Exploitation%20-%20By%20Dean%20Bowen.pdf'">System Exploitation Demo</button>
-        <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
-    </div>
-
-    <!-- Audio Player -->
-    <div id="audio-player">
-        <button id="play-button">music on/off</button>
-        <div id="youtube-player"></div>
-    </div>
-
-    <!-- YouTube API Script -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        var player;
-        var isPlaying = false; // Initialize as not playing
-
-        // Function to create YouTube player
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'Wy_6jN1Yrx8', // Your video ID
-                playerVars: {
-                    autoplay: 0, // Disable autoplay initially
-                    modestbranding: 1,
-                    rel: 0,
-                    controls: 0,
-                    showinfo: 0
-                },
-                events: {
-                    'onReady': onPlayerReady // Automatically play video when player is ready
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // No need to play the video here since autoplay is disabled
-        }
-
-        document.getElementById('play-button').addEventListener('click', function() {
-            if (player) {
-                if (isPlaying) {
-                    player.pauseVideo();
-                    isPlaying = false;
-                } else {
-                    player.playVideo();
-                    isPlaying = true;
-                }
-            }
-        });
-    </script>
-
-</body>
-</html>
