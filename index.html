@@ -145,8 +145,7 @@
         }
 
         function onPlayerReady(event) {
-            event.target.playVideo();
-            isPlaying = true; // Update isPlaying state to true
+            // No need to play the video here since autoplay is disabled
         }
 
         document.getElementById('play-button').addEventListener('click', function() {
