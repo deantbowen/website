@@ -53,12 +53,26 @@
             background-color: darkgreen;
             color: white;
         }
-        /* Adjusted player styles */
+        #audio-player {
+            text-align: center;
+            margin-top: 30px;
+        }
+        #play-button {
+            background-color: lightgreen;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #play-button:hover {
+            background-color: darkgreen;
+            color: white;
+        }
+        /* Hide the YouTube iframe */
         #youtube-player {
-            margin: 20px auto;
-            display: block;
-            width: 560px; /* Adjust width as needed */
-            height: 315px; /* Adjust height as needed */
+            display: none;
         }
     </style>
 </head>
@@ -105,8 +119,36 @@
         <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
     </div>
 
-    <!-- YouTube Video Player -->
-    <iframe id="youtube-player" width="560" height="315" src="https://www.youtube.com/embed/Wy_6jN1Yrx8?autoplay=1" allow="autoplay" frameborder="560"></iframe>
+    <!-- Audio Player -->
+    <div id="audio-player">
+        <button id="play-button">Audio</button>
+        <div id="youtube-player"></div>
+    </div>
+
+    <!-- YouTube API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+
+        // Function to create YouTube player
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                videoId: 'https://youtu.be/Wy_6jN1Yrx8', 
+                playerVars: {
+                    modestbranding: 1,
+                    rel: 0,
+                    controls: 0,
+                    showinfo: 0
+                }
+            });
+        }
+
+        document.getElementById('play-button').addEventListener('click', function() {
+            if (player) {
+                player.playVideo();
+            }
+        });
+    </script>
 
 </body>
 </html>
