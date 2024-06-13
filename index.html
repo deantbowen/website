@@ -58,13 +58,17 @@
             margin-top: 30px;
         }
         #play-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             background-color: lightgreen;
             color: black;
             border: none;
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 20px 40px; /* Double the size */
+            font-size: 36px; /* Double the font size */
             cursor: pointer;
             border-radius: 5px;
+            z-index: 1000;
         }
         #play-button:hover {
             background-color: darkgreen;
@@ -134,9 +138,9 @@
         // Function to create YouTube player
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                videoId: 'Wy_6jN1Yrx8&t', // Your video ID
+                videoId: 'Wy_6jN1Yrx8', // Your video ID
                 playerVars: {
-                    start: 1, // Start at 1 seconds
+                    start: 115, // Start at 115 seconds
                     modestbranding: 1,
                     rel: 0,
                     controls: 0,
