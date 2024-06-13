@@ -129,12 +129,14 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         var player;
+        var isPlaying = false;
 
         // Function to create YouTube player
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('youtube-player', {
-                videoId: '<iframe width="1307" height="735" src="https://www.youtube.com/embed/Wy_6jN1Yrx8" title="3.1_4-root@kali.0cc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>', 
+                videoId: 'Wy_6jN1Yrx8', // Your video ID
                 playerVars: {
+                    start: 115, // Start at 115 seconds
                     modestbranding: 1,
                     rel: 0,
                     controls: 0,
@@ -145,7 +147,13 @@
 
         document.getElementById('play-button').addEventListener('click', function() {
             if (player) {
-                player.playVideo();
+                if (isPlaying) {
+                    player.pauseVideo();
+                    isPlaying = false;
+                } else {
+                    player.playVideo();
+                    isPlaying = true;
+                }
             }
         });
     </script>
