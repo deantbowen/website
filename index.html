@@ -1,3 +1,6 @@
+Sure, I've adjusted the code to make the player visible at the bottom of the page. Here's the updated code:
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +56,11 @@
             background-color: darkgreen;
             color: white;
         }
+        /* Adjusted player styles */
+        #youtube-player {
+            margin: 20px auto;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -98,8 +106,5 @@
         <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
     </div>
 
-    <!-- YouTube Video Autoplay -->
-    <iframe width="20" height="20" src="https://www.youtube.com/embed/Wy_6jN1Yrx8?autoplay=1" allow="autoplay" frameborder="20"></iframe>
-
-</body>
-</html>
+    <!-- YouTube Video Player -->
+    <iframe id="youtube-player" width="560" height="315" src="https://www.youtube.com/embed/Wy_6jN1Yrx8?
