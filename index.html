@@ -90,11 +90,19 @@
         THIS INFORMATION IS FOR LEARNING PURPOSES ONLY! ALWAYS GET PERMISSION BEFORE PERFORMING ANY PENTESTING ON ANY MACHINE OR NETWORK.
     </p>
 
-    <!-- Button to go to another repository -->
+    <!-- Button to play audio file -->
     <div class="button-container">
-        <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Pentesting%20Tools%202024.pdf'">A list of Pentesting tools in 2024</button>
-        <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/System%20Exploitation%20-%20By%20Dean%20Bowen.pdf'">System Exploitation Demo</button>
-        <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
+        <button class="button" onclick="playAudio()">Play Audio</button>
     </div>
+
+    <!-- Audio element -->
+    <audio id="audioPlayer" src="https://github.com/deantbowen/deanswebsite/blob/main/Mr%20Robot%20Main%20Theme%20(128).mp3" type="audio/mpeg"></audio>
+
+    <script>
+        function playAudio() {
+            var audio = document.getElementById('audioPlayer');
+            audio.play();
+        }
+    </script>
 </body>
 </html>
