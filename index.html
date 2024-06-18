@@ -40,6 +40,7 @@
             text-decoration: none;
             font-size: 18px;
             font-weight: bold;
+            cursor: pointer;
         }
         header {
             padding: 100px 20px 20px 20px;
@@ -109,15 +110,18 @@
         #youtube-player {
             display: none;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">What I'm Working On</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a onclick="showSection('about')">About me</a></li>
+            <li><a onclick="showSection('work')">What I'm Working On</a></li>
+            <li><a onclick="showSection('resources')">Resources</a></li>
+            <li><a onclick="showSection('disclaimer')">Disclaimer</a></li>
         </ul>
     </nav>
 
@@ -125,7 +129,7 @@
         <h1>Hey there, I'm Dean</h1>
     </header>
 
-    <section id="about">
+    <section id="about" class="tab-section">
         <h2>About me</h2>
         <p>
             I'm a Cyber Security Analyst based in Cape Town, South Africa.
@@ -134,7 +138,7 @@
         </p>
     </section>
 
-    <section id="work">
+    <section id="work" class="tab-section hidden">
         <h2>What I'm working on</h2>
         <p>
             This website for one, I will be adding more content soon.
@@ -143,7 +147,7 @@
         </p>
     </section>
 
-    <section id="resources">
+    <section id="resources" class="tab-section hidden">
         <h2>Resources</h2>
         <p>
             Below you will find a comprehensive list of Pentesting tools and a few demos I've documented of real hacks performed on my own machines/networks (I gave myself permission).
@@ -155,10 +159,67 @@
         </div>
     </section>
 
-    <section id="disclaimer">
+    <section id="disclaimer" class="tab-section hidden">
         <h2>Disclaimer</h2>
         <p>
             This information is for learning purposes only! 
             Always get permission before performing any pentesting on any machine or network.
         </p>
-    </section
+    </section>
+
+    <div id="audio-player">
+        <button id="play-button">Music</button>
+        <div id="youtube-player"></div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        var player;
+        var isPlaying = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                videoId: 'Wy_6jN1Yrx8',
+                playerVars: {
+                    autoplay: 0,
+                    modestbranding: 1,
+                    rel: 0,
+                    controls: 0,
+                    showinfo: 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {}
+
+        document.getElementById('play-button').addEventListener('click', function() {
+            if (player) {
+                if (isPlaying) {
+                    player.pauseVideo();
+                    isPlaying = false;
+                } else {
+                    player.playVideo();
+                    isPlaying = true;
+                }
+            }
+        });
+
+        // Function to show the selected section and hide others
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.getElementsByClassName('tab-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.add('hidden');
+            }
+            // Show the selected section
+            var selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
