@@ -97,13 +97,12 @@
             transform: scale(1.1);
         }
         #audio-player {
-            text-align: center;
-            margin-top: 30px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
         }
         #play-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             background-color: lightgreen;
             color: black;
             border: none;
@@ -111,7 +110,6 @@
             font-size: 18px;
             cursor: pointer;
             border-radius: 5px;
-            z-index: 1000;
             transition: all 0.3s ease-out;
         }
         #play-button:hover {
@@ -120,10 +118,18 @@
             transform: scale(1.1);
         }
         #youtube-player {
-            display: none;
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            transition: top 0.3s ease-out;
         }
-        .hidden {
-            display: none;
+        #play-button:hover #youtube-player {
+            top: 100%;
         }
     </style>
 </head>
@@ -144,51 +150,47 @@
     <section id="about" class="tab-section">
         <h2>About me</h2>
         <p>
-            I'm Dean, a Cybersecurity Analyst with over a decade of experience in IT. My passion for computers started early—around the age of 8. 
-            <p>
-            I began my career as a PC Technician, building computers and troubleshooting desktops and laptop challanges.
-                <p> I've also been an IT Specialist, fixing and deploying network devices and machines.
+            I'm Dean, a Cybersecurity Analyst with over a decade of experience in IT. My passion for computers started early—around the age of 8.
+        </p>
         <p>
-                My journey continued as a Data Centre Technician at a data center company, providing remote hands for DC clients, 
-             networking, and troubleshooting Linux environments. 
+            I began my career as a PC Technician, building computers and troubleshooting desktops and laptops.
+        </p>
         <p>
-<p>
-Currently, I'm rocking it as a Cyber Security Analyst II at a cybersecurity firm, where I dive deep into Network Security Auditing, 
-    Incident Response, System Hardening, and keeping our systems safe with IDS/IPS.
-    <p>
-
-Before this role, I gained valuable experience as a Cyber Security Analyst I, 
-     specializing in Security Awareness, Endpoint Detection and Response (EDR), and Security Information and Event Management (SIEM). 
-        
-        <p> 
-            These areas allowed me to delve deep into cybersecurity practices and solutions.
-
-
-<p>
-Throughout my career, I've kept up with the ever-changing world of cybersecurity, 
-     always eager to learn and apply new skills.
-            <p>
-            You can find a list of my certifications here:
-                <p> <a href="https://www.credly.com/users/dean-bowen/badges" target="_blank">Credly Profile</a>.
-                <p>
-            If you're into IT, cyber security, and penetration testing, feel free to connect with me on LinkedIn:
-                    <p> <a href="https://www.linkedin.com/in/dtblin" target="_blank">LinkedIn Profile</a>.
+            I've also been an IT Specialist, fixing and deploying network devices and machines.
+        </p>
+        <p>
+            My journey continued as a Data Centre Technician at a data center company, providing remote hands for DC clients, networking, and troubleshooting Linux environments.
+        </p>
+        <p>
+            Currently, I'm rocking it as a Cyber Security Analyst II at a cybersecurity firm, where I dive deep into Network Security Auditing, Incident Response, System Hardening, and keeping our systems safe with IDS/IPS.
+        </p>
+        <p>
+            Before this role, I gained valuable experience as a Cyber Security Analyst I, specializing in Security Awareness, Endpoint Detection and Response (EDR), and Security Information and Event Management (SIEM).
+        </p>
+        <p>
+            Throughout my career, I've kept up with the ever-changing world of cybersecurity, always eager to learn and apply new skills.
+        </p>
+        <p>
+            You can find a list of my certifications here: <a href="https://www.credly.com/users/dean-bowen/badges" target="_blank">Credly Profile</a>.
+        </p>
+        <p>
+            If you're into IT, cyber security, and penetration testing, feel free to connect with me on LinkedIn: <a href="https://www.linkedin.com/in/dtblin" target="_blank">LinkedIn Profile</a>.
         </p>
     </section>
 
     <section id="work" class="tab-section hidden">
         <h2>What I'm working on</h2>
         <p>
-                       <p>
-            Beyond my day job, I'm a dedicated CTF Player on TryHackMe since 2020. 
-                           <p> I've cracked hashes, hacked my way through Mr. Robot rooms, and mastered tools like Metasploit and Wireshark. 
-                               <p> I've covered everything from web hacking to cybersecurity awareness—always learning, always growing.
-                Check that out here: 
-                                   <p> <a href="https://tryhackme.com/p/3chO" target="_blank">TryHackMe Profile</a>.
+            Beyond my day job, I'm a dedicated CTF Player on TryHackMe since 2020.
+        </p>
         <p>
-                     I am also working on this website as a side project, I will be adding more content as I go through my career.
-                    <p>
-            
+            I've cracked hashes, hacked my way through Mr. Robot rooms, and mastered tools like Metasploit and Wireshark.
+        </p>
+        <p>
+            I've covered everything from web hacking to cybersecurity awareness—always learning, always growing. Check that out here: <a href="https://tryhackme.com/p/3chO" target="_blank">TryHackMe Profile</a>.
+        </p>
+        <p>
+            I am also working on this website as a side project, I will be adding more content as I go through my career.
         </p>
     </section>
 
@@ -196,8 +198,9 @@ Throughout my career, I've kept up with the ever-changing world of cybersecurity
         <h2>Resources</h2>
         <p>
             Below you will find a comprehensive list of Pentesting tools.
-            <p>
-            You can also view and download the .pdf versions of my projects below .
+        </p>
+        <p>
+            You can also view and download the .pdf versions of my projects below.
         </p>
         <div class="button-container">
             <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Pentesting%20Tools%202024.pdf'">A list of Pentesting tools in 2024</button>
@@ -210,14 +213,17 @@ Throughout my career, I've kept up with the ever-changing world of cybersecurity
         <h2>Disclaimer</h2>
         <p>
             This information is for learning purposes only!
-            <p>
+        </p>
+        <p>
             Always get permission before performing any pentesting on any machine or network.
         </p>
     </section>
 
     <div id="audio-player">
         <button id="play-button">Music</button>
-        <div id="youtube-player"></div>
+        <div id="youtube-player">
+            <iframe width="300" height="200" src="https://www.youtube.com/embed/Wy_6jN1Yrx8" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
