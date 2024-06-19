@@ -82,6 +82,9 @@
         .button-container {
             text-align: center;
             margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .button {
             background-color: lightgreen;
@@ -91,10 +94,9 @@
             font-size: 18px;
             cursor: pointer;
             border-radius: 5px;
-            margin-right: 10px;
-            text-decoration: none;
-            display: inline-block;
             margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
             transition: all 0.3s ease-out;
         }
         .button:hover {
@@ -107,22 +109,23 @@
             margin-top: 30px;
         }
         #play-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: lightgreen;
-            color: black;
+            background-color: #FF0000;
+            color: white;
             border: none;
-            padding: 20px;
+            padding: 10px;
             font-size: 18px;
             cursor: pointer;
             border-radius: 5px;
             z-index: 1000;
             transition: all 0.3s ease-out;
+            display: flex;
+            align-items: center;
+        }
+        #play-button span {
+            margin-left: 10px;
         }
         #play-button:hover {
-            background-color: darkgreen;
-            color: white;
+            background-color: darkred;
             transform: scale(1.1);
         }
         #youtube-player {
@@ -237,7 +240,10 @@
     </section>
 
     <div id="audio-player">
-        <button id="play-button">Music</button>
+        <button id="play-button">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube Icon" width="30" height="30">
+            <span>Play Music</span>
+        </button>
         <div id="youtube-player"></div>
     </div>
 
