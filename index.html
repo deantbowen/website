@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center; /* Center all text content */
+            text-align: center;
             background-image: url('https://images.unsplash.com/photo-1547190027-9156686aa2f0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-size: cover;
             background-attachment: fixed;
@@ -19,7 +19,7 @@
             background-position: center;
         }
         nav {
-            background-color: rgba(0, 0, 0, 0); /* Transparent background */
+            background-color: rgba(0, 0, 0, 0);
             position: fixed;
             width: 100%;
             top: 0;
@@ -50,6 +50,7 @@
         nav ul li a:hover {
             transform: scale(1.1);
             color: #fff;
+            box-shadow: 0 0 10px lightgreen, 0 0 20px lightgreen, 0 0 30px lightgreen;
         }
         header {
             padding: 100px 20px 20px 20px;
@@ -75,8 +76,8 @@
             font-weight: bold;
         }
         a:hover {
-            color: #fff; /* Change text color to white on hover */
-            text-decoration: underline; /* Underline on hover */
+            color: #fff;
+            text-decoration: underline;
         }
         .button-container {
             text-align: center;
@@ -275,14 +276,11 @@
             }
         });
 
-        // Function to show the selected section and hide others
         function showSection(sectionId) {
-            // Hide all sections
             var sections = document.getElementsByClassName('tab-section');
             for (var i = 0; i < sections.length; i++) {
                 sections[i].classList.add('hidden');
             }
-            // Show the selected section
             var selectedSection = document.getElementById(sectionId);
             if (selectedSection) {
                 selectedSection.classList.remove('hidden');
