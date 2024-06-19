@@ -109,8 +109,11 @@
             margin-top: 30px;
         }
         #play-button {
-            background-color: #FF0000;
-            color: white;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: lightgreen;
+            color: black;
             border: none;
             padding: 10px;
             font-size: 18px;
@@ -121,11 +124,12 @@
             display: flex;
             align-items: center;
         }
-        #play-button span {
-            margin-left: 10px;
+        #play-button img {
+            margin-right: 10px;
         }
         #play-button:hover {
-            background-color: darkred;
+            background-color: darkgreen;
+            color: white;
             transform: scale(1.1);
         }
         #youtube-player {
