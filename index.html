@@ -42,22 +42,7 @@
             margin: 0 15px;
         }
         nav ul li a {
-            color: lightgreen;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: all 0.3s ease-out;
-            padding: 8px 16px;
-            background-color: lightgreen;
-            border-radius: 5px;
-        }
-        nav ul li a:hover {
-            background-color: darkgreen;
-            color: white;
-            transform: scale(1.1);
+            color: black; /* changed this line */
         }
         header {
             padding: 100px 20px 20px 20px;
@@ -128,172 +113,67 @@
             transform: scale(1.1);
         }
         #youtube-player {
-            display: none;
-            margin-top: 10px;
+          width :50%; /* changed this line */
+          height :30%; /* changed this line */
+          display :none; 
         }
-        .tab-section {
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .hidden {
-            display: none;
-        }
+        
+         .hidden{
+          display : none; 
+         }
+
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a onclick="showSection('about')">About Me</a></li>
-            <li><a onclick="showSection('work')">What I'm Working On</a></li>
-            <li><a onclick="showSection('resources')">Resources & Projects</a></li>
-            <li><a onclick="showSection('disclaimer')">Disclaimer</a></li>
-        </ul>
+           <li><a onclick="showSection('about')">About Me</a></li>
+           <li><a onclick="showSection('work')">What I'm Working On</a></li>
+           <li><a onclick="showSection('resources')">Resources & Projects</a></li>
+           <li><a onclick="showSection('disclaimer')">Disclaimer</a></li>
+       </ul>
     </nav>
 
     <header>
-        
+
     </header>
 
     <section id="about" class="tab-section">
-        <p>
-            I'm Dean, a Cybersecurity Analyst with over a decade of experience in IT. My passion for computers started early—around the age of 8.
-        </p>
-        <p>
-            I began my career as a PC Technician, building computers and troubleshooting desktops and laptop challenges.
-        </p>
-        <p>
-            I've also been an IT Specialist, fixing and deploying network devices and machines.
-        </p>
-        <p>
-            My journey continued as a Data Centre Technician at a data center company, providing remote hands for DC clients,
-            networking, and troubleshooting Linux environments.
-        </p>
-        <p>
-            Currently, I'm rocking it as a Cyber Security Analyst II at a cybersecurity firm, where I dive deep into Network Security Auditing,
-            Incident Response, System Hardening, and keeping our systems safe with IDS/IPS.
-        </p>
-        <p>
-            Before this role, I gained valuable experience as a Cyber Security Analyst I,
-            specializing in Security Awareness, Endpoint Detection and Response (EDR), and Security Information and Event Management (SIEM).
-        </p>
-        <p>
-            These areas allowed me to delve deep into cybersecurity practices and solutions.
-        </p>
-        <p>
-            Throughout my career, I've kept up with the ever-changing world of cybersecurity,
-            always eager to learn and apply new skills.
-        </p>
-        <p>
-            You can find a list of my certifications here:
-            <p>
-            <a href="https://www.credly.com/users/dean-bowen/badges" target="_blank">Credly Profile</a>.
-        </p>
-        <p>
-            If you're into IT, cyber security, and penetration testing, feel free to connect with me on LinkedIn:
-            <p>
-            <a href="https://www.linkedin.com/in/dtblin" target="_blank">LinkedIn Profile</a>.
-        </p>
-    </section>
-
-    <section id="work" class="tab-section hidden">
-        <p>
-            Beyond my day job, I'm a dedicated CTF Player on TryHackMe since 2020.
-        </p>
-        <p>
-            I've cracked hashes, hacked my way through Mr. Robot rooms, and mastered tools like Metasploit and Wireshark.
-        </p>
-        <p>
-            I've covered everything from web hacking to cybersecurity awareness—always learning, always growing.
-            View my progress here:
-            <p>
-            <a href="https://tryhackme.com/p/3chO" target="_blank">TryHackMe Profile</a>.
-        </p>
-        <p>
-            I am also working on this website as a side project, I will be adding more content as I go through my career.
-        </p>
-    </section>
-
-    <section id="resources" class="tab-section hidden">
-        <p>
-            Below you will find a comprehensive list of Pentesting tools.
-        </p>
-        <p>
-            You can also view and download the .pdf versions of my projects below.
-        </p>
-        <div class="button-container">
-            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Pentesting%20Tools%202024.pdf'">A list of Pentesting tools in 2024</button>
-            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/System%20Exploitation%20-%20By%20Dean%20Bowen.pdf'">System Exploitation Demo</button>
-            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
-        </div>
-    </section>
-
-    <section id="disclaimer" class="tab-section hidden">
-        <p>
-            This information is for learning purposes only!
-        </p>
-        <p>
-            Always get permission before performing any pentesting on any machine or network.
-        </p>
-    </section>
-
-    <div id="audio-player">
-        <button id="play-button">Music</button>
-        <div id="youtube-player"></div>
-    </div>
-
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        var player;
-        var isPlaying = false;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'Wy_6jN1Yrx8',
-                playerVars: {
-                    autoplay: 0,
-                    modestbranding: 1,
-                    rel: 0,
-                    controls: 1,
-                    showinfo: 0
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {}
-
-        document.getElementById('play-button').addEventListener('click', function() {
-            var playerDiv = document.getElementById('youtube-player');
-            if (player) {
-                if (isPlaying) {
-                    player.pauseVideo();
-                    isPlaying = false;
-                    playerDiv.style.display = 'none';
-                } else {
-                    player.playVideo();
-                    isPlaying = true;
-                    playerDiv.style.display = 'block';
-                }
-            }
-        });
-
-        // Function to show the selected section and hide others
-        function showSection(sectionId) {
-            // Hide all sections
-            var sections = document.getElementsByClassName('tab-section');
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.add('hidden');
-            }
-            // Show the selected section
-            var selectedSection = document.getElementById(sectionId);
-            if (selectedSection) {
-                selectedSection.classList.remove('hidden');
-            }
-        }
-    </script>
-</body>
-</html>
+       <p>
+          I'm Dean, a Cybersecurity Analyst with over a decade of experience in IT. My passion for computers started early—around the age of 8.
+       </p>
+       <p>
+          I began my career as a PC Technician, building computers and troubleshooting desktops and laptop challenges.
+       </p>
+       <p>
+          I've also been an IT Specialist, fixing and deploying network devices and machines.
+       </p>
+       <p>
+          My journey continued as a Data Centre Technician at a data center company, providing remote hands for DC clients,
+          networking, and troubleshooting Linux environments.
+       </p>
+       <p>
+          Currently, I'm rocking it as a Cyber Security Analyst II at a cybersecurity firm, where I dive deep into Network Security Auditing,
+          Incident Response, System Hardening, and keeping our systems safe with IDS/IPS.
+       </p>
+       <p>
+          Before this role, I gained valuable experience as a Cyber Security Analyst I,
+          specializing in Security Awareness, Endpoint Detection and Response (EDR), and Security Information and Event Management (SIEM).
+       </p>
+       <p>
+          These areas allowed me to delve deep into cybersecurity practices and solutions.
+       </p>
+       <p>
+          Throughout my career, I've kept up with the ever-changing world of cybersecurity,
+          always eager to learn and apply new skills.
+       </p>
+       <p>
+          You can find a list of my certifications here:
+           <p>
+              <a href="https://www.credly.com/users/dean-bowen/badges" target="_blank">Credly Profile</a>.
+       </p>
+       <p>
+           If you're into IT, cyber security, and penetration testing, feel free to connect with me on LinkedIn:
+           <p>
+              <a href="https://www.linkedin.com/in/dtblin" target="_blank">LinkedIn Profile</a>.
+       </p>
