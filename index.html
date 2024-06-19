@@ -103,21 +103,20 @@
             transform: scale(1.1);
         }
         #audio-player {
-            text-align: center;
-            margin-top: 30px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            z-index: 1000;
         }
         #play-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
             background-color: lightgreen;
             color: black;
             border: none;
-            padding: 20px;
+            padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
             border-radius: 5px;
-            z-index: 1000;
             transition: all 0.3s ease-out;
         }
         #play-button:hover {
@@ -127,15 +126,16 @@
         }
         #youtube-player {
             display: none;
-        }
-        .hidden {
-            display: none;
+            margin-top: 10px;
         }
         .tab-section {
             width: 100%;
             max-width: 800px;
             padding: 20px;
             box-sizing: border-box;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -154,7 +154,6 @@
     </header>
 
     <section id="about" class="tab-section">
-      
         <p>
             I'm Dean, a Cybersecurity Analyst with over a decade of experience in IT. My passion for computers started early—around the age of 8.
         </p>
@@ -194,7 +193,6 @@
     </section>
 
     <section id="work" class="tab-section hidden">
-        
         <p>
             Beyond my day job, I'm a dedicated CTF Player on TryHackMe since 2020.
         </p>
@@ -212,7 +210,6 @@
     </section>
 
     <section id="resources" class="tab-section hidden">
-       
         <p>
             Below you will find a comprehensive list of Pentesting tools.
         </p>
@@ -227,7 +224,6 @@
     </section>
 
     <section id="disclaimer" class="tab-section hidden">
-        
         <p>
             This information is for learning purposes only!
         </p>
@@ -253,7 +249,7 @@
                     autoplay: 0,
                     modestbranding: 1,
                     rel: 0,
-                    controls: 0,
+                    controls: 1,
                     showinfo: 0
                 },
                 events: {
@@ -265,13 +261,16 @@
         function onPlayerReady(event) {}
 
         document.getElementById('play-button').addEventListener('click', function() {
+            var playerDiv = document.getElementById('youtube-player');
             if (player) {
                 if (isPlaying) {
                     player.pauseVideo();
                     isPlaying = false;
+                    playerDiv.style.display = 'none';
                 } else {
                     player.playVideo();
                     isPlaying = true;
+                    playerDiv.style.display = 'block';
                 }
             }
         });
