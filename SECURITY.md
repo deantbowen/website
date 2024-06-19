@@ -1,0 +1,4 @@
+# Website Security Policy:
+This policy aims to safeguard our website and its data by enforcing strict access controls, including strong passwords and multi-factor authentication for authorized personnel. All data transmission and storage are secured using encryption. Regular updates and patches are applied to software to mitigate vulnerabilities, complemented by secure coding practices and periodic security assessments. Monitoring of system logs ensures timely detection and response to potential security incidents, supported by an incident response plan. Continuous security awareness training for employees and contractors enhances vigilance against phishing and other cyber threats. This policy is periodically reviewed and updated to align with evolving security risks and regulatory requirements, with enforcement overseen by the IT Security team.
+
+
