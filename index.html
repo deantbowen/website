@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tetris Game with Score Saving</title>
+    <title>Dean's Website</title>
     <style>
         body {
             background-color: black;
@@ -141,54 +141,6 @@
         .hidden {
             display: none;
         }
-        #tetrisGameCanvas {
-            border: 1px solid lightgreen;
-            background-color: black;
-        }
-        .game-controls {
-            margin: 20px auto;
-        }
-        .game-controls button {
-            background-color: lightgreen;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 5px;
-            transition: all 0.3s ease-out;
-        }
-        .game-controls button:hover {
-            background-color: darkgreen;
-            color: white;
-            transform: scale(1.1);
-        }
-        #score-section {
-            margin-top: 20px;
-        }
-        #score-section input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid lightgreen;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        #score-section button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: lightgreen;
-            color: black;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease-out;
-        }
-        #score-section button:hover {
-            background-color: darkgreen;
-            color: white;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
@@ -198,22 +150,21 @@
             <li><a onclick="showSection('work')">What I'm Working On</a></li>
             <li><a onclick="showSection('resources')">Resources & Projects</a></li>
             <li><a onclick="showSection('disclaimer')">Disclaimer</a></li>
-            <li><a onclick="showSection('fun')">FUN</a></li>
         </ul>
     </nav>
 
     <header>
-        <h1>Dean's Website</h1>
     </header>
 
     <section id="about" class="tab-section">
         <h2>About me</h2>
         <p>
-            I have most recently served as a Cyber Security Analyst II, where I’ve been responsible for overseeing comprehensive threat analysis, managing detection and response systems (MDR), and strengthening security operations for the past 1 year and 6 months. In this role, I have specialized in key areas such as vulnerability management, web application security, and email security, ensuring strong defenses against evolving cyber threats. I’ve also played a key role in real-time monitoring and proactive threat hunting, consistently adapting to emerging security challenges.
+         I have most recently served as a Cyber Security Analyst II, where I’ve been responsible for overseeing comprehensive threat analysis, managing detection and response systems (MDR), and strengthening security operations for the past 1 year and 6 months. In this role, I have specialized in key areas such as vulnerability management, web application security, and email security, ensuring strong defenses against evolving cyber threats. I’ve also played a key role in real-time monitoring and proactive threat hunting, consistently adapting to emerging security challenges.
+
+Prior to this, I held the position of Cyber Security Analyst I for over two years. During that time, I gained significant experience in endpoint detection and response (EDR) and security information and event management (SIEM). I developed deep expertise in threat hunting, incident response, and overall cybersecurity operations, working to identify and mitigate security risks and continuously improve the organization's security posture.
         </p>
-        <p>
-            I am inspired to be a Security Analyst because of my passion for problem-solving and the constantly evolving nature of cybersecurity. The thrill of identifying and neutralizing threats, coupled with the opportunity to protect organizations from cyberattacks, drives my commitment to the field. I find it deeply rewarding to stay ahead of cybercriminals, using advanced tools and techniques to secure sensitive data and critical systems. The dynamic nature of cybersecurity challenges me to continuously learn, adapt, and improve, ensuring that I can make a meaningful impact in safeguarding the digital world.
-        </p>
+         <p>
+             I am inspired to be a Security Analyst because of my passion for problem-solving and the constantly evolving nature of cybersecurity. The thrill of identifying and neutralizing threats, coupled with the opportunity to protect organizations from cyberattacks, drives my commitment to the field. I find it deeply rewarding to stay ahead of cybercriminals, using advanced tools and techniques to secure sensitive data and critical systems. The dynamic nature of cybersecurity challenges me to continuously learn, adapt, and improve, ensuring that I can make a meaningful impact in safeguarding the digital world.
         <p>
             You can find a list of my certifications here:
         </p>
@@ -232,9 +183,9 @@
         <h2>What I'm working on</h2>
         <p>
             I am a dedicated Capture The Flag (CTF) player on TryHackMe, actively engaged since 2020. 
-        </p>
         <p>
             This website is a work in progress and content will be added when time permits.
+        <p>
         </p>
         <p>
             See my THM profile here:
@@ -247,114 +198,145 @@
     <section id="resources" class="tab-section hidden">
         <h2>Resources</h2>
         <p>
-            Here you can find links to various cybersecurity resources and tools.
+        <p>
+        
+        <p>
+         TOP 10 free security tools: 
+        <p>
+            
+            Wireshark
+
+: Network protocol analyzer for capturing and analyzing network traffic.
+        <p>
+
+Nmap
+        
+
+: Network scanner for discovering hosts, services, and open ports.
+        <p>
+
+Metasploit Framework
+        
+
+: Penetration testing framework for developing and executing exploit code.
+        <p>
+
+Snort
+       
+
+: IDS/IPS for monitoring network traffic and detecting malicious activity.
+        <p>
+
+Suricata
+       
+
+: IDS/IPS for real-time network traffic analysis and threat detection.
+        <p>
+
+OpenVAS
+       
+
+: Vulnerability scanner for detecting and assessing security weaknesses.
+        <p>
+
+Zeek (formerly Bro)
+       
+
+: Network monitoring framework for analyzing network traffic and detecting anomalies.
+        <p>
+
+TheHive
+    
+
+: Security incident response platform for managing and tracking incidents.
+        <p>
+
+Cuckoo Sandbox
+       
+
+: Malware analysis system for detecting and analyzing malicious behavior.
+        <p>
+
+OSQuery
+      
+
+: Endpoint visibility tool for querying operating system data across devices.
+        <p>
+
         </p>
         <p>
-            <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten</a>
+            More resources below:
         </p>
-        <p>
-            <a href="https://www.sans.org/" target="_blank">SANS Institute</a>
-        </p>
+        <div class="button-container">
+            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Pentesting%20Tools%202024.pdf'">A list of Pentesting tools in 2024</button>
+            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/System%20Exploitation%20-%20By%20Dean%20Bowen.pdf'">System Exploitation Demo</button>
+            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
+        </div>
     </section>
 
     <section id="disclaimer" class="tab-section hidden">
         <h2>Disclaimer</h2>
         <p>
-            The information on this site is provided for educational purposes only and does not constitute professional advice.
+            This information is for learning purposes only!
+        </p>
+        <p>
+            Always get permission before performing any pentesting on any machine or network.
         </p>
     </section>
 
-    <section id="fun" class="tab-section hidden">
-        <h2>FUN: Tetris Game</h2>
-        <p>Welcome to the Tetris game! Try to achieve the highest score!</p>
-        <canvas id="tetrisGameCanvas" width="300" height="600"></canvas>
-        <div class="game-controls">
-            <button onclick="startGame()">Start Game</button>
-            <button onclick="pauseGame()">Pause Game</button>
-            <button onclick="resetGame()">Reset Game</button>
-        </div>
-        <div id="score-section">
-            <input type="text" id="playerName" placeholder="Enter your name">
-            <button onclick="saveScore()">Save Score</button>
-        </div>
-        <p id="scoreDisplay">Score: 0</p>
-    </section>
+    <div id="audio-player">
+        <button id="play-button">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube Icon" width="30" height="30">
+            <span>Play Music</span>
+        </button>
+        <div id="youtube-player"></div>
+    </div>
 
-    <footer>
-        <div id="audio-player" class="hidden">
-            <button id="play-button">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" alt="Play Button">
-                <span>Play Music</span>
-            </button>
-        </div>
-    </footer>
-
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Tetris Game Implementation
-        const canvas = document.getElementById('tetrisGameCanvas');
-        const ctx = canvas.getContext('2d');
-        let score = 0;
-        let gameInterval;
-        
-        function startGame() {
-            // Initialize or restart the game
-            score = 0;
-            updateScoreDisplay();
-            gameInterval = setInterval(gameLoop, 1000 / 2); // Example interval
-        }
+        var player;
+        var isPlaying = false;
 
-        function pauseGame() {
-            // Pause the game
-            clearInterval(gameInterval);
-        }
-
-        function resetGame() {
-            // Reset the game
-            clearInterval(gameInterval);
-            score = 0;
-            updateScoreDisplay();
-        }
-
-        function updateScoreDisplay() {
-            document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
-        }
-
-        function gameLoop() {
-            // Game logic here
-            // Example score increment for demonstration
-            score++;
-            updateScoreDisplay();
-        }
-
-        function saveScore() {
-            const playerName = document.getElementById('playerName').value;
-            if (playerName) {
-                alert(`Score of ${score} saved for ${playerName}`);
-                // Here, you would typically send the score and player name to a server or save it locally
-            } else {
-                alert('Please enter your name before saving the score.');
-            }
-        }
-
-        function showSection(id) {
-            document.querySelectorAll('.tab-section').forEach(section => {
-                section.classList.add('hidden');
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                videoId: 'Wy_6jN1Yrx8',
+                playerVars: {
+                    autoplay: 0,
+                    modestbranding: 1,
+                    rel: 0,
+                    controls: 0,
+                    showinfo: 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
             });
-            document.getElementById(id).classList.remove('hidden');
         }
-        
-        // Audio player functionality
-        const audioPlayer = document.getElementById('audio-player');
-        const playButton = document.getElementById('play-button');
 
-        playButton.addEventListener('click', () => {
-            if (audioPlayer.classList.contains('hidden')) {
-                audioPlayer.classList.remove('hidden');
-            } else {
-                audioPlayer.classList.add('hidden');
+        function onPlayerReady(event) {}
+
+        document.getElementById('play-button').addEventListener('click', function() {
+            if (player) {
+                if (isPlaying) {
+                    player.pauseVideo();
+                    isPlaying = false;
+                } else {
+                    player.playVideo();
+                    isPlaying = true;
+                }
             }
         });
 
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('tab-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.add('hidden');
+            }
+            var selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.remove('hidden');
+            }
+        }
     </script>
 </body>
 </html>
