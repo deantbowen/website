@@ -146,6 +146,25 @@
             border: 1px solid lightgreen;
             background-color: black;
         }
+        .game-controls {
+            margin: 20px auto;
+        }
+        .game-controls button {
+            background-color: lightgreen;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+            transition: all 0.3s ease-out;
+        }
+        .game-controls button:hover {
+            background-color: darkgreen;
+            color: white;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -259,6 +278,10 @@
     <section id="fun" class="tab-section hidden">
         <h2>FUN - Snake Game</h2>
         <canvas id="snakeGameCanvas" width="400" height="400"></canvas>
+        <div class="game-controls">
+            <button onclick="startGame()">Start Game</button>
+            <button onclick="resetGame()">Reset Game</button>
+        </div>
         <p>Use arrow keys to control the snake. Enjoy!</p>
     </section>
 
@@ -327,10 +350,18 @@
             var score = 0;
             var gameInterval;
 
-            document.addEventListener('keydown', changeDirection);
-
             function startGame() {
+                snake = [{x: 160, y: 160}];
+                direction = 'RIGHT';
+                score = 0;
+                placeFood();
+                if (gameInterval) clearInterval(gameInterval);
                 gameInterval = setInterval(gameLoop, 100);
+            }
+
+            function resetGame() {
+                clearInterval(gameInterval);
+                startGame();
             }
 
             function gameLoop() {
@@ -411,6 +442,7 @@
                 ctx.fillText('Score: ' + score, canvas.width / 3, canvas.height / 2 + 30);
             }
 
+            document.addEventListener('keydown', changeDirection);
             startGame();
         })();
     </script>
