@@ -142,7 +142,7 @@
         .hidden {
             display: none;
         }
-        #snakeGameCanvas {
+        #tetrisGameCanvas {
             border: 1px solid lightgreen;
             background-color: black;
         }
@@ -250,201 +250,265 @@
             TheHive: Security incident response platform for managing and tracking incidents.
         </p>
         <p>
-            Cuckoo Sandbox: Malware analysis system for detecting and analyzing malicious behavior.
+            MISP: Threat intelligence platform for sharing and correlating security indicators.
         </p>
         <p>
-            OSQuery: Endpoint visibility tool for querying operating system data across devices.
+            OSSEC: Host-based IDS for monitoring and analyzing system logs and events.
         </p>
         <p>
-            More resources below:
+            <a href="https://github.com/0xInfection/0x0-ctf" target="_blank">GitHub Repository with Tools</a>
         </p>
-        <div class="button-container">
-            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Pentesting%20Tools%202024.pdf'">A list of Pentesting tools in 2024</button>
-            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/System%20Exploitation%20-%20By%20Dean%20Bowen.pdf'">System Exploitation Demo</button>
-            <button class="button" onclick="window.location.href='https://github.com/deantbowen/deanswebsite/blob/main/Wireless%20Attack%20Demo%20~%20Dean%20Bowen.pdf'">Attacking Wireless Network Demo</button>
-        </div>
+        <p>
+            Security Awareness Training: <a href="https://www.sans.org/security-awareness-training/" target="_blank">SANS Security Awareness</a>
+        </p>
     </section>
 
     <section id="disclaimer" class="tab-section hidden">
         <h2>Disclaimer</h2>
         <p>
-            This information is for learning purposes only!
-        </p>
-        <p>
-            Always get permission before performing any pentesting on any machine or network.
+            The content on this website is for informational purposes only. I am not responsible for any actions taken based on the information provided. Always consult with a qualified security professional for specific advice and guidance.
         </p>
     </section>
 
     <section id="fun" class="tab-section hidden">
-        <h2>FUN - Snake Game</h2>
-        <canvas id="snakeGameCanvas" width="400" height="400"></canvas>
-        <div class="game-controls">
-            <button onclick="startGame()">Start Game</button>
-            <button onclick="resetGame()">Reset Game</button>
+        <h2>Fun!</h2>
+        <div id="tetris-container">
+            <canvas id="tetrisGameCanvas" width="300" height="600"></canvas>
+            <div class="game-controls">
+                <button id="startGameButton">Start Game</button>
+                <button id="pauseGameButton">Pause Game</button>
+                <button id="resetGameButton">Reset Game</button>
+            </div>
         </div>
-        <p>Use arrow keys to control the snake. Enjoy!</p>
     </section>
 
-    <div id="audio-player">
-        <button id="play-button">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube Icon" width="30" height="30">
-            <span>Play Music</span>
-        </button>
-        <div id="youtube-player"></div>
+    <div id="audio-player" class="hidden">
+        <audio id="audio" controls>
+            <source src="your-audio-file.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <button id="play-button" class="hidden">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Play_icon_%28Font_Awesome%29.svg/2048px-Play_icon_%28Font_Awesome%29.svg.png" alt="Play" width="30" height="30">
+        Play Music
+    </button>
+
     <script>
-        var player;
-        var isPlaying = false;
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
-                videoId: 'Wy_6jN1Yrx8',
-                playerVars: {
-                    autoplay: 0,
-                    modestbranding: 1,
-                    rel: 0,
-                    controls: 0,
-                    showinfo: 0
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {}
-
         document.getElementById('play-button').addEventListener('click', function() {
-            if (player) {
-                if (isPlaying) {
-                    player.pauseVideo();
-                    isPlaying = false;
-                } else {
-                    player.playVideo();
-                    isPlaying = true;
-                }
+            var audio = document.getElementById('audio');
+            var playButton = document.getElementById('play-button');
+            if (audio.paused) {
+                audio.play();
+                playButton.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Play_icon_%28Font_Awesome%29.svg/2048px-Play_icon_%28Font_Awesome%29.svg.png" alt="Pause" width="30" height="30"> Pause Music';
+            } else {
+                audio.pause();
+                playButton.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Play_icon_%28Font_Awesome%29.svg/2048px-Play_icon_%28Font_Awesome%29.svg.png" alt="Play" width="30" height="30"> Play Music';
             }
         });
 
-        function showSection(sectionId) {
-            var sections = document.getElementsByClassName('tab-section');
-            for (var i = 0; i < sections.length; i++) {
-                sections[i].classList.add('hidden');
-            }
-            var selectedSection = document.getElementById(sectionId);
-            if (selectedSection) {
-                selectedSection.classList.remove('hidden');
-            }
+        function showSection(id) {
+            var sections = document.querySelectorAll('.tab-section');
+            sections.forEach(function(section) {
+                section.classList.add('hidden');
+            });
+            document.getElementById(id).classList.remove('hidden');
         }
 
-        // Snake Game Script
-        (function() {
-            var canvas = document.getElementById('snakeGameCanvas');
-            var ctx = canvas.getContext('2d');
-            var snakeSize = 20;
-            var snake = [{x: 160, y: 160}];
-            var food = {x: 100, y: 100};
-            var direction = 'RIGHT';
-            var score = 0;
-            var gameInterval;
+        // Tetris Game JavaScript
+        const canvas = document.getElementById('tetrisGameCanvas');
+        const context = canvas.getContext('2d');
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
+        const gridSize = 30; // Size of each block
+        const rows = canvasHeight / gridSize;
+        const columns = canvasWidth / gridSize;
 
-            function startGame() {
-                snake = [{x: 160, y: 160}];
-                direction = 'RIGHT';
-                score = 0;
-                placeFood();
-                if (gameInterval) clearInterval(gameInterval);
-                gameInterval = setInterval(gameLoop, 100);
-            }
+        let gameInterval;
+        let isPaused = false;
 
-            function resetGame() {
-                clearInterval(gameInterval);
-                startGame();
-            }
+        const colors = [
+            'cyan', 'blue', 'orange', 'yellow', 'green', 'purple', 'red'
+        ];
 
-            function gameLoop() {
-                updateSnakePosition();
-                checkCollisions();
-                drawGame();
-            }
+        const tetrominoes = [
+            // I
+            [
+                [1, 1, 1, 1]
+            ],
+            // J
+            [
+                [0, 0, 1],
+                [1, 1, 1]
+            ],
+            // L
+            [
+                [1, 0, 0],
+                [1, 1, 1]
+            ],
+            // O
+            [
+                [1, 1],
+                [1, 1]
+            ],
+            // S
+            [
+                [0, 1, 1],
+                [1, 1, 0]
+            ],
+            // T
+            [
+                [0, 1, 0],
+                [1, 1, 1]
+            ],
+            // Z
+            [
+                [1, 1, 0],
+                [0, 1, 1]
+            ]
+        ];
 
-            function updateSnakePosition() {
-                var head = Object.assign({}, snake[0]);
+        let board = Array.from({ length: rows }, () => Array(columns).fill(null));
+        let currentPiece = null;
+        let piecePosition = { x: 0, y: 0 };
 
-                if (direction === 'LEFT') head.x -= snakeSize;
-                if (direction === 'RIGHT') head.x += snakeSize;
-                if (direction === 'UP') head.y -= snakeSize;
-                if (direction === 'DOWN') head.y += snakeSize;
-
-                snake.unshift(head);
-
-                if (head.x === food.x && head.y === food.y) {
-                    score++;
-                    placeFood();
-                } else {
-                    snake.pop();
-                }
-            }
-
-            function checkCollisions() {
-                var head = snake[0];
-
-                if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
-                    gameOver();
-                }
-
-                for (var i = 1; i < snake.length; i++) {
-                    if (head.x === snake[i].x && head.y === snake[i].y) {
-                        gameOver();
+        function drawBoard() {
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < columns; x++) {
+                    if (board[y][x]) {
+                        context.fillStyle = board[y][x];
+                        context.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
                     }
                 }
             }
+        }
 
-            function drawGame() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                ctx.fillStyle = 'lightgreen';
-                snake.forEach(function(part) {
-                    ctx.fillRect(part.x, part.y, snakeSize, snakeSize);
-                });
-
-                ctx.fillStyle = 'red';
-                ctx.fillRect(food.x, food.y, snakeSize, snakeSize);
-
-                ctx.fillStyle = 'white';
-                ctx.font = '20px Arial';
-                ctx.fillText('Score: ' + score, 10, 20);
+        function drawPiece() {
+            if (!currentPiece) return;
+            context.fillStyle = currentPiece.color;
+            for (let y = 0; y < currentPiece.shape.length; y++) {
+                for (let x = 0; x < currentPiece.shape[y].length; x++) {
+                    if (currentPiece.shape[y][x]) {
+                        context.fillRect((piecePosition.x + x) * gridSize, (piecePosition.y + y) * gridSize, gridSize, gridSize);
+                    }
+                }
             }
+        }
 
-            function placeFood() {
-                var x = Math.floor(Math.random() * (canvas.width / snakeSize)) * snakeSize;
-                var y = Math.floor(Math.random() * (canvas.height / snakeSize)) * snakeSize;
-                food = {x: x, y: y};
+        function checkCollision(x, y, shape) {
+            for (let row = 0; row < shape.length; row++) {
+                for (let col = 0; col < shape[row].length; col++) {
+                    if (shape[row][col] && (board[y + row] && board[y + row][x + col]) !== null) {
+                        return true;
+                    }
+                }
             }
+            return false;
+        }
 
-            function changeDirection(event) {
-                var key = event.keyCode;
-
-                if (key === 37 && direction !== 'RIGHT') direction = 'LEFT';
-                if (key === 38 && direction !== 'DOWN') direction = 'UP';
-                if (key === 39 && direction !== 'LEFT') direction = 'RIGHT';
-                if (key === 40 && direction !== 'UP') direction = 'DOWN';
+        function mergePiece() {
+            for (let row = 0; row < currentPiece.shape.length; row++) {
+                for (let col = 0; col < currentPiece.shape[row].length; col++) {
+                    if (currentPiece.shape[row][col]) {
+                        board[piecePosition.y + row][piecePosition.x + col] = currentPiece.color;
+                    }
+                }
             }
+        }
 
-            function gameOver() {
+        function removeFullRows() {
+            for (let row = rows - 1; row >= 0; row--) {
+                if (board[row].every(cell => cell !== null)) {
+                    board.splice(row, 1);
+                    board.unshift(Array(columns).fill(null));
+                }
+            }
+        }
+
+        function rotatePiece() {
+            const rotatedShape = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i])).reverse();
+            if (!checkCollision(piecePosition.x, piecePosition.y, rotatedShape)) {
+                currentPiece.shape = rotatedShape;
+            }
+        }
+
+        function movePiece(dx, dy) {
+            if (!checkCollision(piecePosition.x + dx, piecePosition.y + dy, currentPiece.shape)) {
+                piecePosition.x += dx;
+                piecePosition.y += dy;
+            } else if (dy) {
+                mergePiece();
+                removeFullRows();
+                newPiece();
+            }
+            drawBoard();
+            drawPiece();
+        }
+
+        function newPiece() {
+            const randomIndex = Math.floor(Math.random() * tetrominoes.length);
+            currentPiece = {
+                shape: tetrominoes[randomIndex],
+                color: colors[randomIndex]
+            };
+            piecePosition = { x: Math.floor(columns / 2) - Math.floor(currentPiece.shape[0].length / 2), y: 0 };
+
+            if (checkCollision(piecePosition.x, piecePosition.y, currentPiece.shape)) {
                 clearInterval(gameInterval);
-                ctx.fillStyle = 'white';
-                ctx.font = '30px Arial';
-                ctx.fillText('Game Over', canvas.width / 4, canvas.height / 2);
-                ctx.font = '20px Arial';
-                ctx.fillText('Score: ' + score, canvas.width / 3, canvas.height / 2 + 30);
+                alert('Game Over!');
             }
+        }
 
-            document.addEventListener('keydown', changeDirection);
+        function startGame() {
+            board = Array.from({ length: rows }, () => Array(columns).fill(null));
+            newPiece();
+            gameInterval = setInterval(() => {
+                movePiece(0, 1);
+            }, 500);
+        }
+
+        function pauseGame() {
+            if (gameInterval) {
+                clearInterval(gameInterval);
+                gameInterval = null;
+                isPaused = true;
+            } else {
+                gameInterval = setInterval(() => {
+                    movePiece(0, 1);
+                }, 500);
+                isPaused = false;
+            }
+        }
+
+        function resetGame() {
+            if (gameInterval) {
+                clearInterval(gameInterval);
+                gameInterval = null;
+            }
             startGame();
-        })();
+        }
+
+        document.getElementById('startGameButton').addEventListener('click', startGame);
+        document.getElementById('pauseGameButton').addEventListener('click', pauseGame);
+        document.getElementById('resetGameButton').addEventListener('click', resetGame);
+
+        document.addEventListener('keydown', (e) => {
+            switch (e.code) {
+                case 'ArrowLeft':
+                    movePiece(-1, 0);
+                    break;
+                case 'ArrowRight':
+                    movePiece(1, 0);
+                    break;
+                case 'ArrowDown':
+                    movePiece(0, 1);
+                    break;
+                case 'ArrowUp':
+                    rotatePiece();
+                    break;
+            }
+        });
     </script>
 </body>
 </html>
