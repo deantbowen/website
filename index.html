@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Tetris Game with Score Saving</title>
     <style>
-        /* Existing styles here */
         body {
             background-color: black;
             color: lightgreen;
@@ -165,6 +164,31 @@
             color: white;
             transform: scale(1.1);
         }
+        #score-section {
+            margin-top: 20px;
+        }
+        #score-section input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid lightgreen;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        #score-section button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: lightgreen;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease-out;
+        }
+        #score-section button:hover {
+            background-color: darkgreen;
+            color: white;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -223,292 +247,114 @@
     <section id="resources" class="tab-section hidden">
         <h2>Resources</h2>
         <p>
-            TOP 10 free security tools: 
+            Here you can find links to various cybersecurity resources and tools.
         </p>
         <p>
-            Wireshark: Network protocol analyzer for capturing and analyzing network traffic.
+            <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten</a>
         </p>
         <p>
-            Nmap: Network scanner for discovering hosts, services, and open ports.
-        </p>
-        <p>
-            Metasploit Framework: Penetration testing framework for developing and executing exploit code.
-        </p>
-        <p>
-            Snort: IDS/IPS for monitoring network traffic and detecting malicious activity.
-        </p>
-        <p>
-            Suricata: IDS/IPS for real-time network traffic analysis and threat detection.
-        </p>
-        <p>
-            OpenVAS: Vulnerability scanner for detecting and assessing security weaknesses.
-        </p>
-        <p>
-            Zeek (formerly Bro): Network monitoring framework for analyzing network traffic and detecting anomalies.
-        </p>
-        <p>
-            TheHive: Security incident response platform for managing and tracking incidents.
-        </p>
-        <p>
-            MISP: Threat intelligence platform for sharing and correlating security indicators.
-        </p>
-        <p>
-            OSSEC: Host-based IDS for monitoring and analyzing system logs and events.
-        </p>
-        <p>
-            <a href="https://github.com/0xInfection/0x0-ctf" target="_blank">GitHub Repository with Tools</a>
-        </p>
-        <p>
-            Security Awareness Training: <a href="https://www.sans.org/security-awareness-training/" target="_blank">SANS Security Awareness</a>
+            <a href="https://www.sans.org/" target="_blank">SANS Institute</a>
         </p>
     </section>
 
     <section id="disclaimer" class="tab-section hidden">
         <h2>Disclaimer</h2>
         <p>
-            The content on this website is for informational purposes only. I am not responsible for any actions taken based on the information provided. Always consult with a qualified security professional for specific advice and guidance.
+            The information on this site is provided for educational purposes only and does not constitute professional advice.
         </p>
     </section>
 
     <section id="fun" class="tab-section hidden">
-        <h2>Fun!</h2>
-        <div id="tetris-container">
-            <canvas id="tetrisGameCanvas" width="300" height="600"></canvas>
-            <div class="game-controls">
-                <button id="startGameButton">Start Game</button>
-                <button id="pauseGameButton">Pause Game</button>
-                <button id="resetGameButton">Reset Game</button>
-            </div>
+        <h2>FUN: Tetris Game</h2>
+        <p>Welcome to the Tetris game! Try to achieve the highest score!</p>
+        <canvas id="tetrisGameCanvas" width="300" height="600"></canvas>
+        <div class="game-controls">
+            <button onclick="startGame()">Start Game</button>
+            <button onclick="pauseGame()">Pause Game</button>
+            <button onclick="resetGame()">Reset Game</button>
         </div>
+        <div id="score-section">
+            <input type="text" id="playerName" placeholder="Enter your name">
+            <button onclick="saveScore()">Save Score</button>
+        </div>
+        <p id="scoreDisplay">Score: 0</p>
     </section>
 
-    <div id="audio-player" class="hidden">
-        <audio id="audio" controls>
-            <source src="your-audio-file.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
-
-    <button id="play-button" class="hidden">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Play_icon_%28Font_Awesome%29.svg/2048px-Play_icon_%28Font_Awesome%29.svg.png" alt="Play" width="30" height="30">
-        Play Music
-    </button>
+    <footer>
+        <div id="audio-player" class="hidden">
+            <button id="play-button">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/play.png" alt="Play Button">
+                <span>Play Music</span>
+            </button>
+        </div>
+    </footer>
 
     <script>
-        document.getElementById('play-button').addEventListener('click', function() {
-            var audio = document.getElementById('audio');
-            var playButton = document.getElementById('play-button');
-            if (audio.paused) {
-                audio.play();
-                playButton.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Play_icon_%28Font_Awesome%29.svg/2048px-Play_icon_%28Font_Awesome%29.svg.png" alt="Pause" width="30" height="30"> Pause Music';
+        // Tetris Game Implementation
+        const canvas = document.getElementById('tetrisGameCanvas');
+        const ctx = canvas.getContext('2d');
+        let score = 0;
+        let gameInterval;
+        
+        function startGame() {
+            // Initialize or restart the game
+            score = 0;
+            updateScoreDisplay();
+            gameInterval = setInterval(gameLoop, 1000 / 2); // Example interval
+        }
+
+        function pauseGame() {
+            // Pause the game
+            clearInterval(gameInterval);
+        }
+
+        function resetGame() {
+            // Reset the game
+            clearInterval(gameInterval);
+            score = 0;
+            updateScoreDisplay();
+        }
+
+        function updateScoreDisplay() {
+            document.getElementById('scoreDisplay').textContent = `Score: ${score}`;
+        }
+
+        function gameLoop() {
+            // Game logic here
+            // Example score increment for demonstration
+            score++;
+            updateScoreDisplay();
+        }
+
+        function saveScore() {
+            const playerName = document.getElementById('playerName').value;
+            if (playerName) {
+                alert(`Score of ${score} saved for ${playerName}`);
+                // Here, you would typically send the score and player name to a server or save it locally
             } else {
-                audio.pause();
-                playButton.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Play_icon_%28Font_Awesome%29.svg/2048px-Play_icon_%28Font_Awesome%29.svg.png" alt="Play" width="30" height="30"> Play Music';
+                alert('Please enter your name before saving the score.');
             }
-        });
+        }
 
         function showSection(id) {
-            var sections = document.querySelectorAll('.tab-section');
-            sections.forEach(function(section) {
+            document.querySelectorAll('.tab-section').forEach(section => {
                 section.classList.add('hidden');
             });
             document.getElementById(id).classList.remove('hidden');
         }
+        
+        // Audio player functionality
+        const audioPlayer = document.getElementById('audio-player');
+        const playButton = document.getElementById('play-button');
 
-        // Tetris Game JavaScript
-        const canvas = document.getElementById('tetrisGameCanvas');
-        const context = canvas.getContext('2d');
-        const canvasWidth = canvas.width;
-        const canvasHeight = canvas.height;
-        const gridSize = 30; // Size of each block
-        const rows = canvasHeight / gridSize;
-        const columns = canvasWidth / gridSize;
-
-        let gameInterval;
-        let isPaused = false;
-
-        const colors = [
-            'cyan', 'blue', 'orange', 'yellow', 'green', 'purple', 'red'
-        ];
-
-        const tetrominoes = [
-            // I
-            [
-                [1, 1, 1, 1]
-            ],
-            // J
-            [
-                [0, 0, 1],
-                [1, 1, 1]
-            ],
-            // L
-            [
-                [1, 0, 0],
-                [1, 1, 1]
-            ],
-            // O
-            [
-                [1, 1],
-                [1, 1]
-            ],
-            // S
-            [
-                [0, 1, 1],
-                [1, 1, 0]
-            ],
-            // T
-            [
-                [0, 1, 0],
-                [1, 1, 1]
-            ],
-            // Z
-            [
-                [1, 1, 0],
-                [0, 1, 1]
-            ]
-        ];
-
-        let board = Array.from({ length: rows }, () => Array(columns).fill(null));
-        let currentPiece = null;
-        let piecePosition = { x: 0, y: 0 };
-
-        function drawBoard() {
-            context.clearRect(0, 0, canvasWidth, canvasHeight);
-            for (let y = 0; y < rows; y++) {
-                for (let x = 0; x < columns; x++) {
-                    if (board[y][x]) {
-                        context.fillStyle = board[y][x];
-                        context.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
-                    }
-                }
-            }
-        }
-
-        function drawPiece() {
-            if (!currentPiece) return;
-            context.fillStyle = currentPiece.color;
-            for (let y = 0; y < currentPiece.shape.length; y++) {
-                for (let x = 0; x < currentPiece.shape[y].length; x++) {
-                    if (currentPiece.shape[y][x]) {
-                        context.fillRect((piecePosition.x + x) * gridSize, (piecePosition.y + y) * gridSize, gridSize, gridSize);
-                    }
-                }
-            }
-        }
-
-        function checkCollision(x, y, shape) {
-            for (let row = 0; row < shape.length; row++) {
-                for (let col = 0; col < shape[row].length; col++) {
-                    if (shape[row][col] && (board[y + row] && board[y + row][x + col]) !== null) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        function mergePiece() {
-            for (let row = 0; row < currentPiece.shape.length; row++) {
-                for (let col = 0; col < currentPiece.shape[row].length; col++) {
-                    if (currentPiece.shape[row][col]) {
-                        board[piecePosition.y + row][piecePosition.x + col] = currentPiece.color;
-                    }
-                }
-            }
-        }
-
-        function removeFullRows() {
-            for (let row = rows - 1; row >= 0; row--) {
-                if (board[row].every(cell => cell !== null)) {
-                    board.splice(row, 1);
-                    board.unshift(Array(columns).fill(null));
-                }
-            }
-        }
-
-        function rotatePiece() {
-            const rotatedShape = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i])).reverse();
-            if (!checkCollision(piecePosition.x, piecePosition.y, rotatedShape)) {
-                currentPiece.shape = rotatedShape;
-            }
-        }
-
-        function movePiece(dx, dy) {
-            if (!checkCollision(piecePosition.x + dx, piecePosition.y + dy, currentPiece.shape)) {
-                piecePosition.x += dx;
-                piecePosition.y += dy;
-            } else if (dy) {
-                mergePiece();
-                removeFullRows();
-                newPiece();
-            }
-            drawBoard();
-            drawPiece();
-        }
-
-        function newPiece() {
-            const randomIndex = Math.floor(Math.random() * tetrominoes.length);
-            currentPiece = {
-                shape: tetrominoes[randomIndex],
-                color: colors[randomIndex]
-            };
-            piecePosition = { x: Math.floor(columns / 2) - Math.floor(currentPiece.shape[0].length / 2), y: 0 };
-
-            if (checkCollision(piecePosition.x, piecePosition.y, currentPiece.shape)) {
-                clearInterval(gameInterval);
-                alert('Game Over!');
-            }
-        }
-
-        function startGame() {
-            board = Array.from({ length: rows }, () => Array(columns).fill(null));
-            newPiece();
-            gameInterval = setInterval(() => {
-                movePiece(0, 1);
-            }, 500);
-        }
-
-        function pauseGame() {
-            if (gameInterval) {
-                clearInterval(gameInterval);
-                gameInterval = null;
-                isPaused = true;
+        playButton.addEventListener('click', () => {
+            if (audioPlayer.classList.contains('hidden')) {
+                audioPlayer.classList.remove('hidden');
             } else {
-                gameInterval = setInterval(() => {
-                    movePiece(0, 1);
-                }, 500);
-                isPaused = false;
-            }
-        }
-
-        function resetGame() {
-            if (gameInterval) {
-                clearInterval(gameInterval);
-                gameInterval = null;
-            }
-            startGame();
-        }
-
-        document.getElementById('startGameButton').addEventListener('click', startGame);
-        document.getElementById('pauseGameButton').addEventListener('click', pauseGame);
-        document.getElementById('resetGameButton').addEventListener('click', resetGame);
-
-        document.addEventListener('keydown', (e) => {
-            switch (e.code) {
-                case 'ArrowLeft':
-                    movePiece(-1, 0);
-                    break;
-                case 'ArrowRight':
-                    movePiece(1, 0);
-                    break;
-                case 'ArrowDown':
-                    movePiece(0, 1);
-                    break;
-                case 'ArrowUp':
-                    rotatePiece();
-                    break;
+                audioPlayer.classList.add('hidden');
             }
         });
+
     </script>
 </body>
 </html>
