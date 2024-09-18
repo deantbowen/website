@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dean's Website</title>
     <style>
+        /* Existing styles here */
         body {
             background-color: black;
             color: lightgreen;
@@ -141,6 +142,10 @@
         .hidden {
             display: none;
         }
+        #snakeGameCanvas {
+            border: 1px solid lightgreen;
+            background-color: black;
+        }
     </style>
 </head>
 <body>
@@ -150,21 +155,22 @@
             <li><a onclick="showSection('work')">What I'm Working On</a></li>
             <li><a onclick="showSection('resources')">Resources & Projects</a></li>
             <li><a onclick="showSection('disclaimer')">Disclaimer</a></li>
+            <li><a onclick="showSection('fun')">FUN</a></li>
         </ul>
     </nav>
 
     <header>
+        <h1>Dean's Website</h1>
     </header>
 
     <section id="about" class="tab-section">
         <h2>About me</h2>
         <p>
-         I have most recently served as a Cyber Security Analyst II, where I’ve been responsible for overseeing comprehensive threat analysis, managing detection and response systems (MDR), and strengthening security operations for the past 1 year and 6 months. In this role, I have specialized in key areas such as vulnerability management, web application security, and email security, ensuring strong defenses against evolving cyber threats. I’ve also played a key role in real-time monitoring and proactive threat hunting, consistently adapting to emerging security challenges.
-
-Prior to this, I held the position of Cyber Security Analyst I for over two years. During that time, I gained significant experience in endpoint detection and response (EDR) and security information and event management (SIEM). I developed deep expertise in threat hunting, incident response, and overall cybersecurity operations, working to identify and mitigate security risks and continuously improve the organization's security posture.
+            I have most recently served as a Cyber Security Analyst II, where I’ve been responsible for overseeing comprehensive threat analysis, managing detection and response systems (MDR), and strengthening security operations for the past 1 year and 6 months. In this role, I have specialized in key areas such as vulnerability management, web application security, and email security, ensuring strong defenses against evolving cyber threats. I’ve also played a key role in real-time monitoring and proactive threat hunting, consistently adapting to emerging security challenges.
         </p>
-         <p>
-             I am inspired to be a Security Analyst because of my passion for problem-solving and the constantly evolving nature of cybersecurity. The thrill of identifying and neutralizing threats, coupled with the opportunity to protect organizations from cyberattacks, drives my commitment to the field. I find it deeply rewarding to stay ahead of cybercriminals, using advanced tools and techniques to secure sensitive data and critical systems. The dynamic nature of cybersecurity challenges me to continuously learn, adapt, and improve, ensuring that I can make a meaningful impact in safeguarding the digital world.
+        <p>
+            I am inspired to be a Security Analyst because of my passion for problem-solving and the constantly evolving nature of cybersecurity. The thrill of identifying and neutralizing threats, coupled with the opportunity to protect organizations from cyberattacks, drives my commitment to the field. I find it deeply rewarding to stay ahead of cybercriminals, using advanced tools and techniques to secure sensitive data and critical systems. The dynamic nature of cybersecurity challenges me to continuously learn, adapt, and improve, ensuring that I can make a meaningful impact in safeguarding the digital world.
+        </p>
         <p>
             You can find a list of my certifications here:
         </p>
@@ -183,9 +189,9 @@ Prior to this, I held the position of Cyber Security Analyst I for over two year
         <h2>What I'm working on</h2>
         <p>
             I am a dedicated Capture The Flag (CTF) player on TryHackMe, actively engaged since 2020. 
+        </p>
         <p>
             This website is a work in progress and content will be added when time permits.
-        <p>
         </p>
         <p>
             See my THM profile here:
@@ -198,71 +204,37 @@ Prior to this, I held the position of Cyber Security Analyst I for over two year
     <section id="resources" class="tab-section hidden">
         <h2>Resources</h2>
         <p>
+            TOP 10 free security tools: 
+        </p>
         <p>
-        
+            Wireshark: Network protocol analyzer for capturing and analyzing network traffic.
+        </p>
         <p>
-         TOP 10 free security tools: 
+            Nmap: Network scanner for discovering hosts, services, and open ports.
+        </p>
         <p>
-            
-            Wireshark
-
-: Network protocol analyzer for capturing and analyzing network traffic.
+            Metasploit Framework: Penetration testing framework for developing and executing exploit code.
+        </p>
         <p>
-
-Nmap
-        
-
-: Network scanner for discovering hosts, services, and open ports.
+            Snort: IDS/IPS for monitoring network traffic and detecting malicious activity.
+        </p>
         <p>
-
-Metasploit Framework
-        
-
-: Penetration testing framework for developing and executing exploit code.
+            Suricata: IDS/IPS for real-time network traffic analysis and threat detection.
+        </p>
         <p>
-
-Snort
-       
-
-: IDS/IPS for monitoring network traffic and detecting malicious activity.
+            OpenVAS: Vulnerability scanner for detecting and assessing security weaknesses.
+        </p>
         <p>
-
-Suricata
-       
-
-: IDS/IPS for real-time network traffic analysis and threat detection.
+            Zeek (formerly Bro): Network monitoring framework for analyzing network traffic and detecting anomalies.
+        </p>
         <p>
-
-OpenVAS
-       
-
-: Vulnerability scanner for detecting and assessing security weaknesses.
+            TheHive: Security incident response platform for managing and tracking incidents.
+        </p>
         <p>
-
-Zeek (formerly Bro)
-       
-
-: Network monitoring framework for analyzing network traffic and detecting anomalies.
+            Cuckoo Sandbox: Malware analysis system for detecting and analyzing malicious behavior.
+        </p>
         <p>
-
-TheHive
-    
-
-: Security incident response platform for managing and tracking incidents.
-        <p>
-
-Cuckoo Sandbox
-       
-
-: Malware analysis system for detecting and analyzing malicious behavior.
-        <p>
-
-OSQuery
-      
-
-: Endpoint visibility tool for querying operating system data across devices.
-        <p>
-
+            OSQuery: Endpoint visibility tool for querying operating system data across devices.
         </p>
         <p>
             More resources below:
@@ -282,6 +254,12 @@ OSQuery
         <p>
             Always get permission before performing any pentesting on any machine or network.
         </p>
+    </section>
+
+    <section id="fun" class="tab-section hidden">
+        <h2>FUN - Snake Game</h2>
+        <canvas id="snakeGameCanvas" width="400" height="400"></canvas>
+        <p>Use arrow keys to control the snake. Enjoy!</p>
     </section>
 
     <div id="audio-player">
@@ -337,6 +315,104 @@ OSQuery
                 selectedSection.classList.remove('hidden');
             }
         }
+
+        // Snake Game Script
+        (function() {
+            var canvas = document.getElementById('snakeGameCanvas');
+            var ctx = canvas.getContext('2d');
+            var snakeSize = 20;
+            var snake = [{x: 160, y: 160}];
+            var food = {x: 100, y: 100};
+            var direction = 'RIGHT';
+            var score = 0;
+            var gameInterval;
+
+            document.addEventListener('keydown', changeDirection);
+
+            function startGame() {
+                gameInterval = setInterval(gameLoop, 100);
+            }
+
+            function gameLoop() {
+                updateSnakePosition();
+                checkCollisions();
+                drawGame();
+            }
+
+            function updateSnakePosition() {
+                var head = Object.assign({}, snake[0]);
+
+                if (direction === 'LEFT') head.x -= snakeSize;
+                if (direction === 'RIGHT') head.x += snakeSize;
+                if (direction === 'UP') head.y -= snakeSize;
+                if (direction === 'DOWN') head.y += snakeSize;
+
+                snake.unshift(head);
+
+                if (head.x === food.x && head.y === food.y) {
+                    score++;
+                    placeFood();
+                } else {
+                    snake.pop();
+                }
+            }
+
+            function checkCollisions() {
+                var head = snake[0];
+
+                if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+                    gameOver();
+                }
+
+                for (var i = 1; i < snake.length; i++) {
+                    if (head.x === snake[i].x && head.y === snake[i].y) {
+                        gameOver();
+                    }
+                }
+            }
+
+            function drawGame() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = 'lightgreen';
+                snake.forEach(function(part) {
+                    ctx.fillRect(part.x, part.y, snakeSize, snakeSize);
+                });
+
+                ctx.fillStyle = 'red';
+                ctx.fillRect(food.x, food.y, snakeSize, snakeSize);
+
+                ctx.fillStyle = 'white';
+                ctx.font = '20px Arial';
+                ctx.fillText('Score: ' + score, 10, 20);
+            }
+
+            function placeFood() {
+                var x = Math.floor(Math.random() * (canvas.width / snakeSize)) * snakeSize;
+                var y = Math.floor(Math.random() * (canvas.height / snakeSize)) * snakeSize;
+                food = {x: x, y: y};
+            }
+
+            function changeDirection(event) {
+                var key = event.keyCode;
+
+                if (key === 37 && direction !== 'RIGHT') direction = 'LEFT';
+                if (key === 38 && direction !== 'DOWN') direction = 'UP';
+                if (key === 39 && direction !== 'LEFT') direction = 'RIGHT';
+                if (key === 40 && direction !== 'UP') direction = 'DOWN';
+            }
+
+            function gameOver() {
+                clearInterval(gameInterval);
+                ctx.fillStyle = 'white';
+                ctx.font = '30px Arial';
+                ctx.fillText('Game Over', canvas.width / 4, canvas.height / 2);
+                ctx.font = '20px Arial';
+                ctx.fillText('Score: ' + score, canvas.width / 3, canvas.height / 2 + 30);
+            }
+
+            startGame();
+        })();
     </script>
 </body>
 </html>
