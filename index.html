@@ -144,7 +144,7 @@
             <button class="matrix-button blue-pill" onclick="makeChoice('blue')">Take the Blue Pill</button>
         </div>
         <div class="gif-container" id="gifContainer">
-            <img src="https://media.giphy.com/media/xT5LMN1k4hnXSz9MWM/giphy.gif" alt="Neo Ascending">
+            <img src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2018/02/Neo-in-Matrix-Code-Edited.jpg" alt="Neo Ascending">
         </div>
         <div class="image-container" id="imageContainer"></div>
     </div>
@@ -229,14 +229,14 @@
             switch (choice) {
                 case 1:
                     storyDiv.innerHTML = "<p>You speak to the Oracle, who provides you with vital information about your mission!</p>";
-                    gifContainer.innerHTML = '<img src="https://media.giphy.com/media/3o7buvaM7MZRwGZ8V6/giphy.gif" alt="Oracle">';
+                    gifContainer.innerHTML = '<img src="https://external-preview.redd.it/Xm1zDvgS-1XW9Pw7gwGcvq_R5_Uo_mQsI181KBCT7XA.jpg?auto=webp&s=ecab9d8f428cfcd7b07976b2ba72abe6ed183389" alt="Oracle">';
                     gifContainer.style.display = 'block'; // Show Oracle GIF
                     break;
                 case 2:
                     storyDiv.innerHTML = "<p>You confront Agent Smith and are bombarded by millions of his faces!</p>";
                     for (let i = 0; i < 100; i++) {
                         const img = document.createElement('img');
-                        img.src = "https://media.giphy.com/media/3o7buvaM7MZRwGZ8V6/giphy.gif"; // Placeholder for Agent Smith images
+                        img.src = "https://media1.tenor.com/m/Dj0th8SQgtcAAAAC/agent-smith-laugh.gif"; // Placeholder for Agent Smith images
                         img.style.width = "50px"; // Adjust size as needed
                         img.style.position = "absolute";
                         img.style.left = Math.random() * 100 + "vw"; // Random horizontal position
@@ -247,8 +247,8 @@
                 case 3:
                     storyDiv.innerHTML = "<p>You meet the sweaty cave people of Zion!</p>";
                     imageContainer.innerHTML = `
-                        <img src="https://example.com/zion_party_image_1.jpg" alt="Zion Party" />
-                        <img src="https://example.com/zion_party_image_2.jpg" alt="Zion Party" />
+                        <img src="https://www.cms.incluvie.com/wp-content/uploads/2022/01/matrix-party.gif" />
+                       
                     `;
                     imageContainer.style.display = 'block'; // Show Zion images
                     break;
