@@ -3,64 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix-Themed Site</title>
+    <title>Neo vs. Agent Smith Chase</title>
     <style>
         body {
             background-color: black;
-            color: lightgreen;
+            margin: 0;
+            overflow: hidden;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-            background-image: url('https://images.unsplash.com/photo-1547190027-9156686aa2f0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-position: center;
         }
 
-        nav {
-            background-color: rgba(0, 0, 0, 0);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-        
-        /* Navigation styling (unchanged) */
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: lightgreen;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: all 0.3s ease-out;
-            padding: 8px 16px;
-        }
-
-        nav ul li a:hover {
-            transform: scale(1.1);
-            color: #fff;
-            box-shadow: 0 0 10px lightgreen, 0 0 20px lightgreen, 0 0 30px lightgreen;
-        }
-
-        /* Logo screensaver canvas styling */
-        #logoCanvas {
+        #chaseCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -68,97 +20,72 @@
             height: 100%;
             z-index: -1;
         }
-
-        /* Other sections styling (unchanged) */
-        header {
-            padding: 100px 20px 20px 20px;
-            text-align: center;
-        }
-
-        h1, h2, p, a, .button-container {
-            color: lightgreen;
-        }
-
-        /* ...Other styles from the original code... */
     </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a onclick="showSection('about')">About me</a></li>
-            <li><a onclick="showSection('work')">What I'm Working On</a></li>
-            <li><a onclick="showSection('resources')">Resources & Projects</a></li>
-            <li><a onclick="showSection('disclaimer')">Disclaimer</a></li>
-        </ul>
-    </nav>
-
-    <header>
-        <h1>Welcome to My Matrix-Themed Site</h1>
-        <p>Navigate through the sections above, but stay for the cool screensaver!</p>
-    </header>
-
-    <section id="about" class="tab-section">
-        <h2>About me</h2>
-        <!-- Content from original site -->
-        <p>
-            I have most recently served as a Cyber Security Analyst II...
-        </p>
-    </section>
-
-    <!-- Other sections... -->
 
     <!-- Matrix screensaver canvas -->
-    <canvas id="logoCanvas"></canvas>
+    <canvas id="chaseCanvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('logoCanvas');
+        const canvas = document.getElementById('chaseCanvas');
         const ctx = canvas.getContext('2d');
-        let logo = new Image();
-        logo.src = 'https://upload.wikimedia.org/wikipedia/commons/3/31/Matrix_Design.png'; // Example Matrix-themed logo
+        
+        const neo = new Image();
+        const smith = new Image();
+        
+        // Neo and Smith images
+        neo.src = 'https://upload.wikimedia.org/wikipedia/en/c/c6/Neo_%28The_Matrix%29.png';  // Neo image (adjust to better source if needed)
+        smith.src = 'https://upload.wikimedia.org/wikipedia/en/2/2e/Agent_Smith.png';  // Agent Smith image (adjust to better source if needed)
 
-        let logoWidth = 100;
-        let logoHeight = 100;
-        let posX = Math.random() * (window.innerWidth - logoWidth);
-        let posY = Math.random() * (window.innerHeight - logoHeight);
-        let velocityX = 2;
-        let velocityY = 2;
+        let neoWidth = 80, neoHeight = 100;
+        let smithWidth = 80, smithHeight = 100;
+
+        let neoX = Math.random() * (window.innerWidth - neoWidth);
+        let neoY = Math.random() * (window.innerHeight - neoHeight);
+
+        let smithX = Math.random() * (window.innerWidth - smithWidth);
+        let smithY = Math.random() * (window.innerHeight - smithHeight);
+
+        let neoSpeed = 3;
+        let smithSpeed = 2.5;
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        function drawLogo() {
+        function drawCharacters() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(logo, posX, posY, logoWidth, logoHeight);
-            posX += velocityX;
-            posY += velocityY;
 
-            // Bounce off walls
-            if (posX + logoWidth > canvas.width || posX < 0) velocityX = -velocityX;
-            if (posY + logoHeight > canvas.height || posY < 0) velocityY = -velocityY;
+            // Draw Neo and Smith
+            ctx.drawImage(neo, neoX, neoY, neoWidth, neoHeight);
+            ctx.drawImage(smith, smithX, smithY, smithWidth, smithHeight);
 
-            requestAnimationFrame(drawLogo);
+            // Move Neo randomly
+            neoX += (Math.random() - 0.5) * neoSpeed;
+            neoY += (Math.random() - 0.5) * neoSpeed;
+
+            // Keep Neo within bounds
+            if (neoX + neoWidth > canvas.width || neoX < 0) neoX = Math.max(0, Math.min(canvas.width - neoWidth, neoX));
+            if (neoY + neoHeight > canvas.height || neoY < 0) neoY = Math.max(0, Math.min(canvas.height - neoHeight, neoY));
+
+            // Move Smith towards Neo
+            if (smithX < neoX) smithX += smithSpeed;
+            if (smithX > neoX) smithX -= smithSpeed;
+            if (smithY < neoY) smithY += smithSpeed;
+            if (smithY > neoY) smithY -= smithSpeed;
+
+            requestAnimationFrame(drawCharacters);
         }
 
-        logo.onload = () => {
-            drawLogo();
+        neo.onload = smith.onload = () => {
+            drawCharacters();
         };
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-
-        // Section navigation function (unchanged)
-        function showSection(sectionId) {
-            const sections = document.getElementsByClassName('tab-section');
-            for (let i = 0; i < sections.length; i++) {
-                sections[i].classList.add('hidden');
-            }
-            const selectedSection = document.getElementById(sectionId);
-            if (selectedSection) {
-                selectedSection.classList.remove('hidden');
-            }
-        }
     </script>
+
 </body>
 </html>
