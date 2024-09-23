@@ -122,12 +122,12 @@
             }
         }
 
-        .gif-container {
+        .gif-container, .image-container {
             display: none;
             margin-top: 20px;
         }
 
-        .gif-container img {
+        .gif-container img, .image-container img {
             width: 300px;
         }
     </style>
@@ -146,6 +146,7 @@
         <div class="gif-container" id="gifContainer">
             <img src="https://media.giphy.com/media/xT5LMN1k4hnXSz9MWM/giphy.gif" alt="Neo Ascending">
         </div>
+        <div class="image-container" id="imageContainer"></div>
     </div>
 
     <script>
@@ -221,26 +222,47 @@
         function choiceOutcome(choice) {
             const storyDiv = document.getElementById('story');
             const gifContainer = document.getElementById('gifContainer');
+            const imageContainer = document.getElementById('imageContainer');
             gifContainer.style.display = 'none'; // Hide GIF initially
+            imageContainer.style.display = 'none'; // Hide images initially
             
             switch (choice) {
                 case 1:
                     storyDiv.innerHTML = "<p>You speak to the Oracle, who provides you with vital information about your mission!</p>";
+                    gifContainer.innerHTML = '<img src="https://media.giphy.com/media/3o7buvaM7MZRwGZ8V6/giphy.gif" alt="Oracle">';
+                    gifContainer.style.display = 'block'; // Show Oracle GIF
                     break;
                 case 2:
-                    storyDiv.innerHTML = "<p>You confront Agent Smith in an epic battle and narrowly escape with your life!</p>";
+                    storyDiv.innerHTML = "<p>You confront Agent Smith and are bombarded by millions of his faces!</p>";
+                    for (let i = 0; i < 100; i++) {
+                        const img = document.createElement('img');
+                        img.src = "https://media.giphy.com/media/3o7buvaM7MZRwGZ8V6/giphy.gif"; // Placeholder for Agent Smith images
+                        img.style.width = "50px"; // Adjust size as needed
+                        img.style.position = "absolute";
+                        img.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+                        img.style.top = Math.random() * 100 + "vh"; // Random vertical position
+                        document.body.appendChild(img);
+                    }
                     break;
                 case 3:
-                    storyDiv.innerHTML = "<p>You successfully escape to Zion, where you join the fight against the machines!</p>";
+                    storyDiv.innerHTML = "<p>You meet the sweaty cave people of Zion!</p>";
+                    imageContainer.innerHTML = `
+                        <img src="https://example.com/zion_party_image_1.jpg" alt="Zion Party" />
+                        <img src="https://example.com/zion_party_image_2.jpg" alt="Zion Party" />
+                    `;
+                    imageContainer.style.display = 'block'; // Show Zion images
                     break;
                 case 4:
-                    storyDiv.innerHTML = "<p>You hack the system and uncover secrets that could change the fate of humanity!</p>";
+                    storyDiv.innerHTML = `
+                        <p>You hack the system and uncover secrets!</p>
+                        <p>Check it out: <a href="https://tryhackme.com/p/3chO" target="_blank">TryHackMe Link</a></p>
+                    `;
                     break;
                 default:
                     storyDiv.innerHTML = "<p>Something went wrong.</p>";
                     break;
             }
-            gifContainer.style.display = 'block'; // Show the GIF of Neo ascending
+            gifContainer.style.display = 'block'; // Show GIF of Neo ascending if applicable
         }
 
         // Fake crash when remaining ignorant
