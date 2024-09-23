@@ -121,6 +121,15 @@
                 transform: translate(2px, -2px);
             }
         }
+
+        .gif-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .gif-container img {
+            width: 300px;
+        }
     </style>
 </head>
 <body>
@@ -133,6 +142,9 @@
             <p>You see a red pill and a blue pill in front of you. Choose wisely.</p>
             <button class="matrix-button red-pill" onclick="makeChoice('red')">Take the Red Pill</button>
             <button class="matrix-button blue-pill" onclick="makeChoice('blue')">Take the Blue Pill</button>
+        </div>
+        <div class="gif-container" id="gifContainer">
+            <img src="https://media.giphy.com/media/xT5LMN1k4hnXSz9MWM/giphy.gif" alt="Neo Ascending">
         </div>
     </div>
 
@@ -198,8 +210,61 @@
             const storyDiv = document.getElementById('story');
             storyDiv.innerHTML = `
                 <p>You chose to seek the truth. The secrets of the Matrix are being revealed to you...</p>
-                <p>Congratulations! You have unlocked the hidden mysteries of the digital world.</p>
+                <p>You find ten more choices in the digital realm:</p>
+                <button class="matrix-button" onclick="choiceOutcome(1)">Choice 1: Speak to the Oracle</button>
+                <button class="matrix-button" onclick="choiceOutcome(2)">Choice 2: Fight Agent Smith</button>
+                <button class="matrix-button" onclick="choiceOutcome(3)">Choice 3: Escape to Zion</button>
+                <button class="matrix-button" onclick="choiceOutcome(4)">Choice 4: Hack the System</button>
+                <button class="matrix-button" onclick="choiceOutcome(5)">Choice 5: Find Morpheus</button>
+                <button class="matrix-button" onclick="choiceOutcome(6)">Choice 6: Discover Hidden Codes</button>
+                <button class="matrix-button" onclick="choiceOutcome(7)">Choice 7: Join the Resistance</button>
+                <button class="matrix-button" onclick="choiceOutcome(8)">Choice 8: Learn to Fly</button>
+                <button class="matrix-button" onclick="choiceOutcome(9)">Choice 9: Enter the Construct</button>
+                <button class="matrix-button" onclick="choiceOutcome(10)">Choice 10: Challenge the Architect</button>
             `;
+        }
+
+        function choiceOutcome(choice) {
+            const storyDiv = document.getElementById('story');
+            const gifContainer = document.getElementById('gifContainer');
+            gifContainer.style.display = 'none'; // Hide GIF initially
+            
+            switch (choice) {
+                case 1:
+                    storyDiv.innerHTML = "<p>You gained wisdom from the Oracle!</p>";
+                    break;
+                case 2:
+                    storyDiv.innerHTML = "<p>You fought bravely but retreated to fight another day.</p>";
+                    break;
+                case 3:
+                    storyDiv.innerHTML = "<p>You reached Zion, the last human city!</p>";
+                    break;
+                case 4:
+                    storyDiv.innerHTML = "<p>You successfully hacked the system, revealing hidden truths!</p>";
+                    break;
+                case 5:
+                    storyDiv.innerHTML = "<p>You found Morpheus, who trained you in combat!</p>";
+                    break;
+                case 6:
+                    storyDiv.innerHTML = "<p>You discovered hidden codes that grant you new powers!</p>";
+                    break;
+                case 7:
+                    storyDiv.innerHTML = "<p>You joined the Resistance and became a key player in the fight!</p>";
+                    break;
+                case 8:
+                    storyDiv.innerHTML = "<p>You learned to fly, defying the laws of the Matrix!</p>";
+                    break;
+                case 9:
+                    storyDiv.innerHTML = "<p>You entered the Construct and simulated new experiences!</p>";
+                    break;
+                case 10:
+                    storyDiv.innerHTML = "<p>You challenged the Architect and altered the Matrix!</p>";
+                    break;
+                default:
+                    storyDiv.innerHTML = "<p>Something went wrong.</p>";
+                    break;
+            }
+            gifContainer.style.display = 'block'; // Show the GIF of Neo ascending
         }
 
         // Fake crash when remaining ignorant
