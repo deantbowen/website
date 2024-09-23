@@ -188,8 +188,28 @@
             storyDiv.innerHTML = `
                 <p>You entered the door, and you find yourself in a dark room with a single glowing console.</p>
                 <p>A voice asks: "Do you wish to understand the truth or remain in ignorance?"</p>
-                <button class="matrix-button" onclick="makeChoice('truth')">Seek the Truth</button>
-                <button class="matrix-button" onclick="makeChoice('ignorance')">Remain in Ignorance</button>
+                <button class="matrix-button" onclick="seekTruth()">Seek the Truth</button>
+                <button class="matrix-button" onclick="remainIgnorant()">Remain in Ignorance</button>
+            `;
+        }
+
+        // Continue the game when seeking truth
+        function seekTruth() {
+            const storyDiv = document.getElementById('story');
+            storyDiv.innerHTML = `
+                <p>You chose to seek the truth. The secrets of the Matrix are being revealed to you...</p>
+                <p>Congratulations! You have unlocked the hidden mysteries of the digital world.</p>
+            `;
+        }
+
+        // Fake crash when remaining ignorant
+        function remainIgnorant() {
+            document.body.innerHTML = `
+                <div class="fake-crash crash-animation">
+                    <p>ERROR: SYSTEM FAILURE</p>
+                    <p>You chose to remain ignorant - The Matrix has collapsed.</p>
+                    <p>Press F5 to attempt a reboot...</p>
+                </div>
             `;
         }
     </script>
