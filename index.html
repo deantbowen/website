@@ -3,100 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo vs. Agent Smith - Matrix Chase</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-image: url('https://wallpaperaccess.com/full/1205680.jpg'); /* Matrix-themed background */
-            background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
-        }
-
-        #chaseCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-    </style>
+    <title>Matrix-Themed Adventure</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="matrix-background"></div>
+    <div class="content">
+        <h1>Welcome to the Matrix</h1>
+        <p>You have entered the digital world. What will you do next?</p>
+        
+        <div id="story">
+            <p>You see a red pill and a blue pill in front of you. Choose wisely.</p>
+            <button onclick="makeChoice('red')">Take the Red Pill</button>
+            <button onclick="makeChoice('blue')">Take the Blue Pill</button>
+        </div>
+    </div>
 
-    <!-- Canvas for the chase animation -->
-    <canvas id="chaseCanvas"></canvas>
-
-    <script>
-        const canvas = document.getElementById('chaseCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Load Neo and Agent Smith images
-        const neo = new Image();
-        const smith = new Image();
-        neo.src = 'https://upload.wikimedia.org/wikipedia/en/c/c6/Neo_%28The_Matrix%29.png';  // Neo portrait
-        smith.src = 'https://upload.wikimedia.org/wikipedia/en/2/2e/Agent_Smith.png';  // Agent Smith portrait
-
-        let neoWidth = 100, neoHeight = 150;
-        let smithWidth = 100, smithHeight = 150;
-
-        // Initial positions
-        let neoX = Math.random() * (window.innerWidth - neoWidth);
-        let neoY = Math.random() * (window.innerHeight - neoHeight);
-
-        let smithX = Math.random() * (window.innerWidth - smithWidth);
-        let smithY = Math.random() * (window.innerHeight - smithHeight);
-
-        // Speed settings
-        let neoSpeed = 4;
-        let smithSpeed = 3;
-
-        // Set canvas to full window size
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        // Animation loop to draw Neo and Agent Smith
-        function drawCharacters() {
-            // Clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Draw Neo
-            ctx.drawImage(neo, neoX, neoY, neoWidth, neoHeight);
-
-            // Draw Agent Smith
-            ctx.drawImage(smith, smithX, smithY, smithWidth, smithHeight);
-
-            // Random movement for Neo
-            neoX += (Math.random() - 0.5) * neoSpeed;
-            neoY += (Math.random() - 0.5) * neoSpeed;
-
-            // Ensure Neo stays within screen bounds
-            if (neoX + neoWidth > canvas.width || neoX < 0) neoX = Math.max(0, Math.min(canvas.width - neoWidth, neoX));
-            if (neoY + neoHeight > canvas.height || neoY < 0) neoY = Math.max(0, Math.min(canvas.height - neoHeight, neoY));
-
-            // Agent Smith chases Neo
-            if (smithX < neoX) smithX += smithSpeed;
-            if (smithX > neoX) smithX -= smithSpeed;
-            if (smithY < neoY) smithY += smithSpeed;
-            if (smithY > neoY) smithY -= smithSpeed;
-
-            // Continue the animation
-            requestAnimationFrame(drawCharacters);
-        }
-
-        // Start animation once images are loaded
-        neo.onload = smith.onload = () => {
-            drawCharacters();
-        };
-
-        // Resize canvas when window is resized
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
