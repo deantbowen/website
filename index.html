@@ -1,116 +1,197 @@
-/* Matrix-style background */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Courier New', monospace;
-    color: #00FF00;
-    background-color: black;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix-Themed Adventure</title>
+    <style>
+        /* Matrix-style background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Courier New', monospace;
+            color: #00FF00;
+            background-color: black;
+        }
 
-#matrix-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    overflow: hidden;
-    z-index: -1;
-}
+        #matrix-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+            z-index: -1;
+        }
 
-/* Falling green text for matrix effect */
-.matrix-column {
-    position: absolute;
-    top: 0;
-    white-space: nowrap;
-    font-size: 20px;
-    color: #00FF00;
-    text-shadow: 0 0 5px #00FF00;
-    animation: fall 4s linear infinite;
-}
+        /* Falling green text for matrix effect */
+        .matrix-column {
+            position: absolute;
+            top: 0;
+            white-space: nowrap;
+            font-size: 20px;
+            color: #00FF00;
+            text-shadow: 0 0 5px #00FF00;
+            animation: fall 4s linear infinite;
+        }
 
-@keyframes fall {
-    0% {
-        top: -100%;
-    }
-    100% {
-        top: 100%;
-    }
-}
+        @keyframes fall {
+            0% {
+                top: -100%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
 
-/* Content styling */
-.content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 20px;
-}
+        /* Content styling */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 20px;
+        }
 
-h1 {
-    color: #00FF00;
-    text-shadow: 0 0 10px #00FF00;
-}
+        h1 {
+            color: #00FF00;
+            text-shadow: 0 0 10px #00FF00;
+        }
 
-.matrix-button {
-    padding: 15px 30px;
-    margin: 10px;
-    background-color: transparent;
-    border: 2px solid #00FF00;
-    color: #00FF00;
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
-}
+        .matrix-button {
+            padding: 15px 30px;
+            margin: 10px;
+            background-color: transparent;
+            border: 2px solid #00FF00;
+            color: #00FF00;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
 
-.matrix-button:hover {
-    background-color: #00FF00;
-    color: black;
-}
+        .matrix-button:hover {
+            background-color: #00FF00;
+            color: black;
+        }
 
-.red-pill {
-    border-color: #FF0000;
-    color: #FF0000;
-}
+        .red-pill {
+            border-color: #FF0000;
+            color: #FF0000;
+        }
 
-.red-pill:hover {
-    background-color: #FF0000;
-    color: black;
-}
+        .red-pill:hover {
+            background-color: #FF0000;
+            color: black;
+        }
 
-.blue-pill {
-    border-color: #0000FF;
-    color: #0000FF;
-}
+        .blue-pill {
+            border-color: #0000FF;
+            color: #0000FF;
+        }
 
-.blue-pill:hover {
-    background-color: #0000FF;
-    color: black;
-}
+        .blue-pill:hover {
+            background-color: #0000FF;
+            color: black;
+        }
 
-.fake-crash {
-    font-size: 40px;
-    color: red;
-    text-align: center;
-    padding: 100px;
-}
+        .fake-crash {
+            font-size: 40px;
+            color: red;
+            text-align: center;
+            padding: 100px;
+        }
 
-/* Custom "crash" screen animation */
-.crash-animation {
-    animation: glitch 0.5s infinite;
-}
+        /* Custom "crash" screen animation */
+        .crash-animation {
+            animation: glitch 0.5s infinite;
+        }
 
-@keyframes glitch {
-    0% {
-        opacity: 1;
-        transform: translate(2px, -2px);
-    }
-    50% {
-        opacity: 0.8;
-        transform: translate(-2px, 2px);
-    }
-    100% {
-        opacity: 1;
-        transform: translate(2px, -2px);
-    }
-}
+        @keyframes glitch {
+            0% {
+                opacity: 1;
+                transform: translate(2px, -2px);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(-2px, 2px);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(2px, -2px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="matrix-background"></div>
+    <div class="content">
+        <h1>Welcome to the Matrix</h1>
+        <p>You have entered the digital world. What will you do next?</p>
+        
+        <div id="story">
+            <p>You see a red pill and a blue pill in front of you. Choose wisely.</p>
+            <button class="matrix-button red-pill" onclick="makeChoice('red')">Take the Red Pill</button>
+            <button class="matrix-button blue-pill" onclick="makeChoice('blue')">Take the Blue Pill</button>
+        </div>
+    </div>
+
+    <script>
+        // Matrix text effect logic
+        const matrixBackground = document.getElementById('matrix-background');
+
+        function createMatrixColumn() {
+            const column = document.createElement('div');
+            column.classList.add('matrix-column');
+            matrixBackground.appendChild(column);
+            const matrixCharacters = '01'.split('');
+            
+            const columnText = Array(30).fill().map(() => matrixCharacters[Math.floor(Math.random() * matrixCharacters.length)]).join('');
+            column.innerText = columnText;
+            
+            column.style.left = `${Math.random() * 100}vw`;
+            column.style.animationDuration = `${Math.random() * 2 + 3}s`;
+            
+            setTimeout(() => {
+                column.remove();
+            }, 5000);
+        }
+
+        // Continuously generate matrix columns
+        setInterval(createMatrixColumn, 100);
+
+        // Game logic for the adventure
+        function makeChoice(choice) {
+            const storyDiv = document.getElementById('story');
+            
+            if (choice === 'red') {
+                // Continue the game
+                storyDiv.innerHTML = `
+                    <p>You chose the red pill. The Matrix begins to unravel...</p>
+                    <p>You see a door in front of you. Will you enter?</p>
+                    <button class="matrix-button" onclick="nextStep()">Enter the Door</button>
+                `;
+            } else if (choice === 'blue') {
+                // Fake crash
+                document.body.innerHTML = `
+                    <div class="fake-crash crash-animation">
+                        <p>ERROR: SYSTEM FAILURE</p>
+                        <p>Blue Pill Overdose - The Matrix has collapsed.</p>
+                        <p>Press F5 to attempt a reboot...</p>
+                    </div>
+                `;
+            }
+        }
+
+        function nextStep() {
+            const storyDiv = document.getElementById('story');
+            storyDiv.innerHTML = `
+                <p>You entered the door, and you find yourself in a dark room with a single glowing console.</p>
+                <p>A voice asks: "Do you wish to understand the truth or remain in ignorance?"</p>
+                <button class="matrix-button" onclick="makeChoice('truth')">Seek the Truth</button>
+                <button class="matrix-button" onclick="makeChoice('ignorance')">Remain in Ignorance</button>
+            `;
+        }
+    </script>
+</body>
+</html>
