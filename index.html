@@ -210,17 +210,11 @@
             const storyDiv = document.getElementById('story');
             storyDiv.innerHTML = `
                 <p>You chose to seek the truth. The secrets of the Matrix are being revealed to you...</p>
-                <p>You find ten more choices in the digital realm:</p>
+                <p>You find four choices in the digital realm:</p>
                 <button class="matrix-button" onclick="choiceOutcome(1)">Choice 1: Speak to the Oracle</button>
                 <button class="matrix-button" onclick="choiceOutcome(2)">Choice 2: Fight Agent Smith</button>
                 <button class="matrix-button" onclick="choiceOutcome(3)">Choice 3: Escape to Zion</button>
                 <button class="matrix-button" onclick="choiceOutcome(4)">Choice 4: Hack the System</button>
-                <button class="matrix-button" onclick="choiceOutcome(5)">Choice 5: Find Morpheus</button>
-                <button class="matrix-button" onclick="choiceOutcome(6)">Choice 6: Discover Hidden Codes</button>
-                <button class="matrix-button" onclick="choiceOutcome(7)">Choice 7: Join the Resistance</button>
-                <button class="matrix-button" onclick="choiceOutcome(8)">Choice 8: Learn to Fly</button>
-                <button class="matrix-button" onclick="choiceOutcome(9)">Choice 9: Enter the Construct</button>
-                <button class="matrix-button" onclick="choiceOutcome(10)">Choice 10: Challenge the Architect</button>
             `;
         }
 
@@ -231,34 +225,16 @@
             
             switch (choice) {
                 case 1:
-                    storyDiv.innerHTML = "<p>You gained wisdom from the Oracle!</p>";
+                    storyDiv.innerHTML = "<p>You speak to the Oracle, who provides you with vital information about your mission!</p>";
                     break;
                 case 2:
-                    storyDiv.innerHTML = "<p>You fought bravely but retreated to fight another day.</p>";
+                    storyDiv.innerHTML = "<p>You confront Agent Smith in an epic battle and narrowly escape with your life!</p>";
                     break;
                 case 3:
-                    storyDiv.innerHTML = "<p>You reached Zion, the last human city!</p>";
+                    storyDiv.innerHTML = "<p>You successfully escape to Zion, where you join the fight against the machines!</p>";
                     break;
                 case 4:
-                    storyDiv.innerHTML = "<p>You successfully hacked the system, revealing hidden truths!</p>";
-                    break;
-                case 5:
-                    storyDiv.innerHTML = "<p>You found Morpheus, who trained you in combat!</p>";
-                    break;
-                case 6:
-                    storyDiv.innerHTML = "<p>You discovered hidden codes that grant you new powers!</p>";
-                    break;
-                case 7:
-                    storyDiv.innerHTML = "<p>You joined the Resistance and became a key player in the fight!</p>";
-                    break;
-                case 8:
-                    storyDiv.innerHTML = "<p>You learned to fly, defying the laws of the Matrix!</p>";
-                    break;
-                case 9:
-                    storyDiv.innerHTML = "<p>You entered the Construct and simulated new experiences!</p>";
-                    break;
-                case 10:
-                    storyDiv.innerHTML = "<p>You challenged the Architect and altered the Matrix!</p>";
+                    storyDiv.innerHTML = "<p>You hack the system and uncover secrets that could change the fate of humanity!</p>";
                     break;
                 default:
                     storyDiv.innerHTML = "<p>Something went wrong.</p>";
