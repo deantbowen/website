@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neo vs. Agent Smith Chase</title>
+    <title>Neo vs. Agent Smith - Matrix Chase</title>
     <style>
         body {
-            background-color: black;
             margin: 0;
             overflow: hidden;
+            background-image: url('https://wallpaperaccess.com/full/1205680.jpg'); /* Matrix-themed background */
+            background-size: cover;
+            background-position: center;
             font-family: Arial, sans-serif;
         }
 
@@ -18,69 +20,78 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 
-    <!-- Matrix screensaver canvas -->
+    <!-- Canvas for the chase animation -->
     <canvas id="chaseCanvas"></canvas>
 
     <script>
         const canvas = document.getElementById('chaseCanvas');
         const ctx = canvas.getContext('2d');
-        
+
+        // Load Neo and Agent Smith images
         const neo = new Image();
         const smith = new Image();
-        
-        // Neo and Smith images
-        neo.src = 'https://upload.wikimedia.org/wikipedia/en/c/c6/Neo_%28The_Matrix%29.png';  // Neo image (adjust to better source if needed)
-        smith.src = 'https://upload.wikimedia.org/wikipedia/en/2/2e/Agent_Smith.png';  // Agent Smith image (adjust to better source if needed)
+        neo.src = 'https://upload.wikimedia.org/wikipedia/en/c/c6/Neo_%28The_Matrix%29.png';  // Neo portrait
+        smith.src = 'https://upload.wikimedia.org/wikipedia/en/2/2e/Agent_Smith.png';  // Agent Smith portrait
 
-        let neoWidth = 80, neoHeight = 100;
-        let smithWidth = 80, smithHeight = 100;
+        let neoWidth = 100, neoHeight = 150;
+        let smithWidth = 100, smithHeight = 150;
 
+        // Initial positions
         let neoX = Math.random() * (window.innerWidth - neoWidth);
         let neoY = Math.random() * (window.innerHeight - neoHeight);
 
         let smithX = Math.random() * (window.innerWidth - smithWidth);
         let smithY = Math.random() * (window.innerHeight - smithHeight);
 
-        let neoSpeed = 3;
-        let smithSpeed = 2.5;
+        // Speed settings
+        let neoSpeed = 4;
+        let smithSpeed = 3;
 
+        // Set canvas to full window size
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // Animation loop to draw Neo and Agent Smith
         function drawCharacters() {
+            // Clear the canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Draw Neo and Smith
+            // Draw Neo
             ctx.drawImage(neo, neoX, neoY, neoWidth, neoHeight);
+
+            // Draw Agent Smith
             ctx.drawImage(smith, smithX, smithY, smithWidth, smithHeight);
 
-            // Move Neo randomly
+            // Random movement for Neo
             neoX += (Math.random() - 0.5) * neoSpeed;
             neoY += (Math.random() - 0.5) * neoSpeed;
 
-            // Keep Neo within bounds
+            // Ensure Neo stays within screen bounds
             if (neoX + neoWidth > canvas.width || neoX < 0) neoX = Math.max(0, Math.min(canvas.width - neoWidth, neoX));
             if (neoY + neoHeight > canvas.height || neoY < 0) neoY = Math.max(0, Math.min(canvas.height - neoHeight, neoY));
 
-            // Move Smith towards Neo
+            // Agent Smith chases Neo
             if (smithX < neoX) smithX += smithSpeed;
             if (smithX > neoX) smithX -= smithSpeed;
             if (smithY < neoY) smithY += smithSpeed;
             if (smithY > neoY) smithY -= smithSpeed;
 
+            // Continue the animation
             requestAnimationFrame(drawCharacters);
         }
 
+        // Start animation once images are loaded
         neo.onload = smith.onload = () => {
             drawCharacters();
         };
 
+        // Resize canvas when window is resized
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
